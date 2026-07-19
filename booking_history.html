@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Booking History - The Titans Library</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700&amp;family=JetBrains+Mono:wght@500&amp;family=Work+Sans:wght@400&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "inverse-surface": "#17324d",
+            "on-tertiary": "#ffffff",
+            "surface": "#f8f9ff",
+            "on-secondary-container": "#785a1a",
+            "on-primary-fixed-variant": "#3a4859",
+            "on-error-container": "#93000a",
+            "on-primary-fixed": "#0f1c2c",
+            "surface-tint": "#525f71",
+            "on-secondary-fixed": "#261900",
+            "surface-dim": "#c2dcff",
+            "primary-fixed": "#d6e4f9",
+            "outline": "#74777d",
+            "on-secondary-fixed-variant": "#5d4201",
+            "outline-variant": "#c4c6cc",
+            "on-surface": "#001d36",
+            "on-secondary": "#ffffff",
+            "primary-fixed-dim": "#bac8dc",
+            "tertiary-fixed-dim": "#c9c7b5",
+            "inverse-primary": "#bac8dc",
+            "surface-container-highest": "#d1e4ff",
+            "on-surface-variant": "#44474c",
+            "tertiary-container": "#1c1c11",
+            "tertiary": "#000000",
+            "secondary-container": "#fed488",
+            "on-primary-container": "#778598",
+            "surface-variant": "#d1e4ff",
+            "error": "#ba1a1a",
+            "tertiary-fixed": "#e6e3d0",
+            "surface-container": "#e5efff",
+            "secondary": "#775a19",
+            "on-tertiary-container": "#868474",
+            "error-container": "#ffdad6",
+            "on-error": "#ffffff",
+            "inverse-on-surface": "#e9f1ff",
+            "primary-container": "#0f1c2c",
+            "background": "#f8f9ff",
+            "on-primary": "#ffffff",
+            "on-background": "#001d36",
+            "secondary-fixed-dim": "#e9c176",
+            "primary": "#000000",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-fixed": "#1c1c11",
+            "surface-container-low": "#eef4ff",
+            "secondary-fixed": "#ffdea5",
+            "surface-bright": "#f8f9ff",
+            "surface-container-high": "#dbe9ff",
+            "on-tertiary-fixed-variant": "#48473a"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "sm": "16px",
+            "lg": "40px",
+            "xl": "64px",
+            "xs": "8px",
+            "margin-desktop": "80px",
+            "margin-mobile": "16px",
+            "base": "4px",
+            "gutter": "24px",
+            "md": "24px"
+          },
+          "fontFamily": {
+            "headline-lg": ["Hanken Grotesk"],
+            "body-md": ["Work Sans"],
+            "label-lg": ["JetBrains Mono"],
+            "body-sm": ["Work Sans"],
+            "headline-md": ["Hanken Grotesk"],
+            "headline-lg-mobile": ["Hanken Grotesk"],
+            "body-lg": ["Work Sans"],
+            "label-md": ["JetBrains Mono"],
+            "headline-sm": ["Hanken Grotesk"]
+          },
+          "fontSize": {
+            "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+            "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-md": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+            "headline-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .material-symbols-outlined[data-weight="fill"] {
+      font-variation-settings: 'FILL' 1;
+    }
+
+    /* Subtle tonal elevation for cards */
+    .card-elevation {
+      border: 1px solid rgba(65, 90, 119, 0.2);
+      background-color: #FFFFFF;
+    }
+
+    /* Hover effect for cards */
+    .card-hover:hover {
+      border-color: #C5A059;
+      transition: border-color 0.2s ease-in-out;
+    }
+  </style>
+</head>
+
+<body class="bg-background text-on-background font-body-md min-h-screen pt-16 pb-24 md:pb-8 flex flex-col md:flex-row">
+  <!-- TopAppBar (Mobile & Desktop) -->
+  <header
+    class="fixed top-0 w-full z-50 bg-surface dark:bg-surface-container-high flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 shadow-none md:hidden">
+    <div class="flex items-center gap-4">
+      <span
+        class="material-symbols-outlined text-primary dark:text-inverse-primary cursor-pointer active:scale-95 transition-transform"
+        data-icon="menu_book">menu_book</span>
+      <h1 class="text-headline-sm font-headline-sm font-bold text-primary dark:text-inverse-primary">The Titans Library
+      </h1>
+    </div>
+    <button
+      class="text-label-lg font-label-lg text-primary dark:text-inverse-primary hover:bg-secondary-container transition-colors duration-200 px-3 py-1.5 rounded active:scale-95">
+      Scan to Enter
+    </button>
+  </header>
+  <!-- Navigation Drawer (Desktop) -->
+  <nav
+    class="hidden md:flex fixed left-0 top-0 h-full w-80 rounded-r-full bg-surface-container-low dark:bg-surface-container-lowest flex-col py-6 shadow-md z-40">
+    <div class="flex items-center gap-4 px-6 mb-8">
+      <span class="material-symbols-outlined text-primary text-headline-sm" data-icon="menu_book">menu_book</span>
+      <h1 class="text-headline-sm font-headline-sm font-bold text-primary">The Titans Library</h1>
+    </div>
+    <!-- Profile Header Layout -->
+    <div class="px-6 mb-8 flex flex-col items-start">
+      <img alt="User Profile Avatar"
+        class="w-16 h-16 rounded-full mb-3 object-cover border-2 border-secondary-container"
+        data-alt="A professional headshot avatar of a student in a modern library setting. The lighting is bright and clear, reflecting a light-mode modern corporate aesthetic with subtle navy and gold accents in the background."
+        src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0SqT0TXxkuesUzBHUcRJSoDxbMxNSiZRNPTly9zVCO8aPQE602B0J9E3vTV6fyp_4JIl1cg3-95tFbizp_7iLOdRdL7jfChPpZAx-oyIsX8XbcvP59kJQ5wmPSMwn18hYo1lY9lkwmnMt-471RSsjqdn6oWgyNT7ZXKthabPKMMwv0u4VevnOuWgjOUMv1oNriiBgJ3RdvPyoBAtDm00AC7MdIsO3TBkuTF9ifTGI0obHSBCPo2Xo" />
+      <h2 class="text-headline-sm font-headline-sm text-primary">Titans Member</h2>
+      <p class="text-body-sm font-body-sm text-on-surface-variant">Academic Year 2024</p>
+      <span
+        class="mt-2 inline-block bg-secondary-container text-on-secondary-container text-label-md font-label-md px-2 py-1 rounded">Premium
+        Member</span>
+    </div>
+    <ul class="flex flex-col gap-2 flex-grow">
+      <li><a
+          class="flex items-center gap-4 text-on-surface-variant px-4 py-2 mx-2 hover:bg-surface-container-high rounded-full transition-all duration-300 ease-in-out"
+          href="#"><span class="material-symbols-outlined" data-icon="home">home</span><span
+            class="text-label-lg font-label-lg">Home</span></a></li>
+      <li><a
+          class="flex items-center gap-4 bg-secondary-container text-on-secondary-container font-bold rounded-full mx-2 px-4 py-2 transition-all duration-300 ease-in-out"
+          href="#"><span class="material-symbols-outlined" data-icon="history" data-weight="fill">history</span><span
+            class="text-label-lg font-label-lg">History</span></a></li>
+      <li><a
+          class="flex items-center gap-4 text-on-surface-variant px-4 py-2 mx-2 hover:bg-surface-container-high rounded-full transition-all duration-300 ease-in-out"
+          href="#"><span class="material-symbols-outlined" data-icon="person">person</span><span
+            class="text-label-lg font-label-lg">Profile</span></a></li>
+      <li class="mt-4 border-t border-outline-variant pt-4 mx-4"></li>
+      <li><a
+          class="flex items-center gap-4 text-on-surface-variant px-4 py-2 mx-2 hover:bg-surface-container-high rounded-full transition-all duration-300 ease-in-out"
+          href="#"><span class="material-symbols-outlined" data-icon="event_seat">event_seat</span><span
+            class="text-label-lg font-label-lg">Seat Booking</span></a></li>
+      <li><a
+          class="flex items-center gap-4 text-on-surface-variant px-4 py-2 mx-2 hover:bg-surface-container-high rounded-full transition-all duration-300 ease-in-out"
+          href="#"><span class="material-symbols-outlined" data-icon="payments">payments</span><span
+            class="text-label-lg font-label-lg">Fee Structure</span></a></li>
+      <li><a
+          class="flex items-center gap-4 text-on-surface-variant px-4 py-2 mx-2 hover:bg-surface-container-high rounded-full transition-all duration-300 ease-in-out"
+          href="#"><span class="material-symbols-outlined" data-icon="schedule">schedule</span><span
+            class="text-label-lg font-label-lg">Shift Timings</span></a></li>
+      <li><a
+          class="flex items-center gap-4 text-on-surface-variant px-4 py-2 mx-2 hover:bg-surface-container-high rounded-full transition-all duration-300 ease-in-out mt-auto mb-4"
+          href="#"><span class="material-symbols-outlined" data-icon="settings">settings</span><span
+            class="text-label-lg font-label-lg">Settings</span></a></li>
+    </ul>
+  </nav>
+  <!-- Main Content Canvas -->
+  <main class="flex-1 w-full px-margin-mobile md:px-margin-desktop md:ml-80 max-w-6xl mx-auto py-8">
+    <!-- Header Section -->
+    <div class="mb-gutter flex flex-col md:flex-row md:justify-between md:items-end gap-4">
+      <div>
+        <h2
+          class="text-headline-lg-mobile md:text-headline-lg font-headline-lg-mobile md:font-headline-lg text-primary mb-2">
+          Booking History</h2>
+        <p class="text-body-md font-body-md text-on-surface-variant max-w-2xl">Review your past study sessions and
+          seating allocations. Regular attendance contributes to your academic consistency.</p>
+      </div>
+      <!-- Filters/Sorting -->
+      <div class="flex gap-2">
+        <button
+          class="flex items-center gap-2 px-4 py-2 border border-outline rounded-full text-label-md font-label-md text-primary hover:border-[#C5A059] transition-colors bg-white">
+          <span class="material-symbols-outlined text-[18px]" data-icon="filter_list">filter_list</span>
+          Filter
+        </button>
+        <button
+          class="flex items-center gap-2 px-4 py-2 border border-outline rounded-full text-label-md font-label-md text-primary hover:border-[#C5A059] transition-colors bg-white">
+          <span class="material-symbols-outlined text-[18px]" data-icon="calendar_month">calendar_month</span>
+          Oct 2024
+        </button>
+      </div>
+    </div>
+    <!-- History List (Bento-inspired grid layout for list items) -->
+    <div class="flex flex-col gap-sm">
+      <!-- Entry 1 -->
+      <div
+        class="card-elevation card-hover rounded-xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 cursor-pointer relative overflow-hidden group">
+        <!-- Subtle indicator line -->
+        <div
+          class="absolute left-0 top-0 bottom-0 w-1 bg-secondary opacity-0 group-hover:opacity-100 transition-opacity">
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded bg-surface-container flex flex-col items-center justify-center text-primary">
+            <span class="text-label-lg font-label-lg font-bold">24</span>
+            <span class="text-[10px] uppercase tracking-wider font-label-md">Oct</span>
+          </div>
+          <div>
+            <h3 class="text-headline-sm font-headline-sm text-primary mb-1">Morning Focus Shift</h3>
+            <p class="text-body-sm font-body-sm text-on-surface-variant flex items-center gap-1">
+              <span class="material-symbols-outlined text-[16px]" data-icon="schedule">schedule</span>
+              08:00 AM - 02:00 PM
+            </p>
+          </div>
+        </div>
+        <div
+          class="flex items-center justify-between md:justify-end gap-6 border-t md:border-t-0 border-outline-variant pt-3 md:pt-0">
+          <div class="flex flex-col items-start md:items-end">
+            <span class="text-label-md font-label-md text-on-surface-variant mb-1 uppercase tracking-widest">Seat
+              Allocated</span>
+            <div class="flex items-center gap-2">
+              <span
+                class="px-2 py-1 bg-surface-container-highest text-primary text-label-lg font-label-lg rounded font-bold border border-outline-variant">A14</span>
+              <span
+                class="text-xs font-label-md text-secondary bg-secondary-container px-2 py-0.5 rounded-full">COMPLETED</span>
+            </div>
+          </div>
+          <button aria-label="View Details" class="text-primary hover:text-secondary transition-colors">
+            <span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+          </button>
+        </div>
+      </div>
+      <!-- Entry 2 -->
+      <div
+        class="card-elevation card-hover rounded-xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 cursor-pointer relative overflow-hidden group">
+        <div
+          class="absolute left-0 top-0 bottom-0 w-1 bg-secondary opacity-0 group-hover:opacity-100 transition-opacity">
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded bg-surface-container flex flex-col items-center justify-center text-primary">
+            <span class="text-label-lg font-label-lg font-bold">23</span>
+            <span class="text-[10px] uppercase tracking-wider font-label-md">Oct</span>
+          </div>
+          <div>
+            <h3 class="text-headline-sm font-headline-sm text-primary mb-1">Evening Deep Work</h3>
+            <p class="text-body-sm font-body-sm text-on-surface-variant flex items-center gap-1">
+              <span class="material-symbols-outlined text-[16px]" data-icon="schedule">schedule</span>
+              04:00 PM - 10:00 PM
+            </p>
+          </div>
+        </div>
+        <div
+          class="flex items-center justify-between md:justify-end gap-6 border-t md:border-t-0 border-outline-variant pt-3 md:pt-0">
+          <div class="flex flex-col items-start md:items-end">
+            <span class="text-label-md font-label-md text-on-surface-variant mb-1 uppercase tracking-widest">Seat
+              Allocated</span>
+            <div class="flex items-center gap-2">
+              <span
+                class="px-2 py-1 bg-surface-container-highest text-primary text-label-lg font-label-lg rounded font-bold border border-outline-variant">C08</span>
+              <span
+                class="text-xs font-label-md text-secondary bg-secondary-container px-2 py-0.5 rounded-full">COMPLETED</span>
+            </div>
+          </div>
+          <button aria-label="View Details" class="text-primary hover:text-secondary transition-colors">
+            <span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+          </button>
+        </div>
+      </div>
+      <!-- Entry 3 (Missed Session) -->
+      <div
+        class="card-elevation rounded-xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 relative overflow-hidden opacity-75">
+        <div class="flex items-center gap-4">
+          <div
+            class="w-12 h-12 rounded bg-surface-variant flex flex-col items-center justify-center text-on-surface-variant">
+            <span class="text-label-lg font-label-lg font-bold">21</span>
+            <span class="text-[10px] uppercase tracking-wider font-label-md">Oct</span>
+          </div>
+          <div>
+            <h3 class="text-headline-sm font-headline-sm text-on-surface-variant mb-1">Morning Focus Shift</h3>
+            <p class="text-body-sm font-body-sm text-on-surface-variant flex items-center gap-1">
+              <span class="material-symbols-outlined text-[16px]" data-icon="schedule">schedule</span>
+              08:00 AM - 02:00 PM
+            </p>
+          </div>
+        </div>
+        <div
+          class="flex items-center justify-between md:justify-end gap-6 border-t md:border-t-0 border-outline-variant pt-3 md:pt-0">
+          <div class="flex flex-col items-start md:items-end">
+            <span class="text-label-md font-label-md text-on-surface-variant mb-1 uppercase tracking-widest">Seat
+              Allocated</span>
+            <div class="flex items-center gap-2">
+              <span
+                class="px-2 py-1 bg-surface-variant text-on-surface-variant text-label-lg font-label-lg rounded border border-outline-variant">A12</span>
+              <span class="text-xs font-label-md text-error bg-error-container px-2 py-0.5 rounded-full">MISSED</span>
+            </div>
+          </div>
+          <div class="w-6"></div> <!-- Spacer to align with chevron -->
+        </div>
+      </div>
+      <!-- Entry 4 -->
+      <div
+        class="card-elevation card-hover rounded-xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 cursor-pointer relative overflow-hidden group">
+        <div
+          class="absolute left-0 top-0 bottom-0 w-1 bg-secondary opacity-0 group-hover:opacity-100 transition-opacity">
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded bg-surface-container flex flex-col items-center justify-center text-primary">
+            <span class="text-label-lg font-label-lg font-bold">19</span>
+            <span class="text-[10px] uppercase tracking-wider font-label-md">Oct</span>
+          </div>
+          <div>
+            <h3 class="text-headline-sm font-headline-sm text-primary mb-1">Full Day Access</h3>
+            <p class="text-body-sm font-body-sm text-on-surface-variant flex items-center gap-1">
+              <span class="material-symbols-outlined text-[16px]" data-icon="schedule">schedule</span>
+              08:00 AM - 10:00 PM
+            </p>
+          </div>
+        </div>
+        <div
+          class="flex items-center justify-between md:justify-end gap-6 border-t md:border-t-0 border-outline-variant pt-3 md:pt-0">
+          <div class="flex flex-col items-start md:items-end">
+            <span class="text-label-md font-label-md text-on-surface-variant mb-1 uppercase tracking-widest">Seat
+              Allocated</span>
+            <div class="flex items-center gap-2">
+              <span
+                class="px-2 py-1 bg-surface-container-highest text-primary text-label-lg font-label-lg rounded font-bold border border-outline-variant">B02</span>
+              <span
+                class="text-xs font-label-md text-secondary bg-secondary-container px-2 py-0.5 rounded-full">COMPLETED</span>
+            </div>
+          </div>
+          <button aria-label="View Details" class="text-primary hover:text-secondary transition-colors">
+            <span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+          </button>
+        </div>
+      </div>
+      <!-- Load More Button -->
+      <div class="mt-4 flex justify-center">
+        <button
+          class="px-6 py-2 border border-primary text-primary font-label-lg text-label-lg rounded hover:bg-surface-container transition-colors">
+          Load Previous Month
+        </button>
+      </div>
+    </div>
+  </main>
+  <!-- BottomNavBar (Mobile Only) -->
+  <nav
+    class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center h-20 px-4 z-50 bg-surface dark:bg-inverse-surface shadow-sm">
+    <a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-secondary active:scale-90 transition-transform"
+      href="library_dashboard.html">
+      <span class="material-symbols-outlined" data-icon="home">home</span>
+      <span class="text-label-md font-label-md mt-1">Home</span>
+    </a>
+    <a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 active:scale-90 transition-transform"
+      href="booking_history.html">
+      <span class="material-symbols-outlined" data-icon="history" data-weight="fill">history</span>
+      <span class="text-label-md font-label-md mt-1 font-bold">History</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary px-4 py-1 active:scale-90 transition-transform w-20"
+      href="library_map.html">
+      <span class="material-symbols-outlined mb-1">map</span>
+      <span class="font-label-md text-label-md">Map</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-secondary active:scale-90 transition-transform"
+      href="my_profile.html">
+      <span class="material-symbols-outlined" data-icon="person">person</span>
+      <span class="text-label-md font-label-md mt-1">Profile</span>
+    </a>
+  </nav>
+</body>
+
+</html>

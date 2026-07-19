@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Sign Up - The Titans Library</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Work+Sans:wght@400;500&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#17324d",
+                        "on-tertiary": "#ffffff",
+                        "surface": "#f8f9ff",
+                        "on-secondary-container": "#785a1a",
+                        "on-primary-fixed-variant": "#3a4859",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#0f1c2c",
+                        "surface-tint": "#525f71",
+                        "on-secondary-fixed": "#261900",
+                        "surface-dim": "#c2dcff",
+                        "primary-fixed": "#d6e4f9",
+                        "outline": "#74777d",
+                        "on-secondary-fixed-variant": "#5d4201",
+                        "outline-variant": "#c4c6cc",
+                        "on-surface": "#001d36",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#bac8dc",
+                        "tertiary-fixed-dim": "#c9c7b5",
+                        "inverse-primary": "#bac8dc",
+                        "surface-container-highest": "#d1e4ff",
+                        "on-surface-variant": "#44474c",
+                        "tertiary-container": "#1c1c11",
+                        "tertiary": "#000000",
+                        "secondary-container": "#fed488",
+                        "on-primary-container": "#778598",
+                        "surface-variant": "#d1e4ff",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#e6e3d0",
+                        "surface-container": "#e5efff",
+                        "secondary": "#775a19",
+                        "on-tertiary-container": "#868474",
+                        "error-container": "#ffdad6",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#e9f1ff",
+                        "primary-container": "#0f1c2c",
+                        "background": "#f8f9ff",
+                        "on-primary": "#ffffff",
+                        "on-background": "#001d36",
+                        "secondary-fixed-dim": "#e9c176",
+                        "primary": "#000000",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#1c1c11",
+                        "surface-container-low": "#eef4ff",
+                        "secondary-fixed": "#ffdea5",
+                        "surface-bright": "#f8f9ff",
+                        "surface-container-high": "#dbe9ff",
+                        "on-tertiary-fixed-variant": "#48473a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "sm": "16px",
+                        "lg": "40px",
+                        "xl": "64px",
+                        "xs": "8px",
+                        "margin-desktop": "80px",
+                        "margin-mobile": "16px",
+                        "base": "4px",
+                        "gutter": "24px",
+                        "md": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-md": ["Work Sans"],
+                        "label-lg": ["JetBrains Mono"],
+                        "body-sm": ["Work Sans"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "body-lg": ["Work Sans"],
+                        "label-md": ["JetBrains Mono"],
+                        "headline-sm": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-md": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+    
+</head>
+
+<body class="bg-surface text-on-surface min-h-screen flex flex-col md:flex-row antialiased">
+    <!-- Left side: Branding / Image -->
+    <div class="hidden md:flex md:w-1/2 bg-primary relative overflow-hidden flex-col justify-between p-lg lg:p-xl">
+        <div
+            class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]">
+        </div>
+        <div class="relative z-10">
+            <div class="flex items-center gap-xs text-on-primary mb-xl">
+                <span class="material-symbols-outlined text-headline-md"
+                    style="font-variation-settings: 'FILL' 1;">menu_book</span>
+                <span class="font-headline-md text-headline-md">The Titans Library</span>
+            </div>
+            <h1 class="font-headline-lg text-headline-lg text-on-primary mb-md max-w-md">
+                Begin your journey to academic excellence.
+            </h1>
+            <p class="font-body-lg text-body-lg text-primary-fixed-dim max-w-md">
+                Join our premium reading environment designed for absolute focus and rigor. Space is limited.
+            </p>
+        </div>
+        <div class="relative z-10 flex gap-4 mt-auto">
+            <!-- Decorative stats -->
+            <div
+                class="bg-surface-container/10 backdrop-blur-sm rounded-xl p-4 border border-outline-variant/20 flex-1">
+                <div class="font-headline-sm text-headline-sm text-secondary-container">24/7</div>
+                <div class="font-label-md text-label-md text-primary-fixed-dim uppercase tracking-wider mt-1">Access
+                    Available</div>
+            </div>
+            <div
+                class="bg-surface-container/10 backdrop-blur-sm rounded-xl p-4 border border-outline-variant/20 flex-1">
+                <div class="font-headline-sm text-headline-sm text-secondary-container">Premium</div>
+                <div class="font-label-md text-label-md text-primary-fixed-dim uppercase tracking-wider mt-1">Study
+                    Desks</div>
+            </div>
+        </div>
+    </div>
+    <!-- Right side: Sign Up Form -->
+    <div
+        class="w-full md:w-1/2 flex items-center justify-center p-margin-mobile md:p-margin-desktop bg-surface relative min-h-screen">
+        <!-- Mobile Header (Visible only on mobile) -->
+        <div
+            class="md:hidden absolute top-0 left-0 w-full flex items-center gap-xs p-margin-mobile bg-surface text-primary border-b border-outline-variant/30">
+            <span class="material-symbols-outlined text-headline-sm"
+                style="font-variation-settings: 'FILL' 1;">menu_book</span>
+            <span class="font-headline-sm text-headline-sm font-bold">The Titans Library</span>
+        </div>
+        <div class="w-full max-w-md mt-16 md:mt-0">
+            <div class="mb-lg text-center md:text-left">
+                <h2
+                    class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2">
+                    Create Account</h2>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                    Please fill out the details below to request membership.
+                </p>
+            </div>
+            <!-- Admin Approval Notice Banner -->
+            <div
+                class="bg-surface-container-low border border-outline-variant rounded-lg p-4 mb-lg flex gap-3 items-start">
+                <span class="material-symbols-outlined text-on-surface-variant mt-0.5">info</span>
+                <div>
+                    <h3 class="font-label-lg text-label-lg text-on-surface mb-1">Approval Required</h3>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant">
+                        All new accounts require administrative approval before you can book seats or access facilities.
+                    </p>
+                </div>
+            </div>
+            <form id="Signup" class="space-y-6" method="POST">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="input-label" for="fullName">Full Name</label>
+                        <input class="input-field" id="fullName" name="fullName" placeholder="John Doe" required="" type="text" />
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="input-label" for="email">Email Address</label>
+                        <input class="input-field" id="email" name="email" placeholder="john.doe@example.com" required="" type="email" />
+                    </div>
+                    <div>
+                        <label class="input-label" for="password">Password</label>
+                        <input class="input-field" id="password" name="password" placeholder="••••••••" required="" type="password" />
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="input-label" for="mobileNumber">Mobile Number</label>
+                        <input class="input-field" id="mobileNumber" name="mobileNumber" placeholder="+1234567890" type="tel" />
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="input-label" for="collegeName">College Name</label>
+                        <input class="input-field" id="collegeName" name="collegeName" placeholder="ABC College" type="text" />
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-3">
+                    <div class="flex items-center h-5">
+                        <input class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary bg-surface-container-lowest" id="terms" name="terms" required="" type="checkbox" />
+                    </div>
+                    <div>
+                        <label class="font-body-sm text-body-sm text-on-surface-variant" for="terms">
+                            I agree to the <a class="text-primary font-medium hover:underline" href="#">Terms & Conditions</a> and <a class="text-primary font-medium hover:underline" href="#">Privacy Policy</a>.
+                        </label>
+                    </div>
+                </div>
+
+                <button id="register" class="w-full bg-primary text-on-primary font-label-lg text-label-lg py-4 rounded-lg hover:bg-on-primary-fixed transition-colors duration-200 flex justify-center items-center gap-2" type="submit">
+                    Register
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                </button>
+            </form>
+            <!-- Login Link -->
+            <div class="mt-lg text-center">
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                    Already a member?
+                    <a class="text-primary font-semibold hover:underline decoration-2 underline-offset-4" href="index.html">Log
+                        in here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    document.getElementById("Signup").addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const fullName = document.getElementById("fullName").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const mobileNumber = document.getElementById("mobileNumber") ? document.getElementById("mobileNumber").value : null;
+        const collegeName = document.getElementById("collegeName") ? document.getElementById("collegeName").value : null;
+        const termsAccepted = document.getElementById("terms").checked;
+
+        if (!termsAccepted) {
+            alert("You must accept the Terms & Conditions and Privacy Policy.");
+            return;
+        }
+
+        try {
+            const res = await fetch("https://the-titans.onrender.com/signup", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    fullName,
+                    email,
+                    password,
+                    mobileNumber,
+                    collegeName,
+                    termsAccepted
+                })
+            });
+            const data = await res.json();
+            if (res.ok) {
+                alert(data.message || "Registration successful! Please wait for admin approval.");
+                window.location.href = "index.html";
+            } else {
+                alert(data.message || "An error occurred during registration. Please try again.");
+            }
+        } catch (error) {
+            console.error("Error during registration:", error);
+            alert("An error occurred during registration. Please try again.");
+        }
+    });
+</script>
+
+</html>

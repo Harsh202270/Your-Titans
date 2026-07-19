@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Booking Details - The Titans Library</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+
+        .glass {
+            backdrop-filter: blur(10px);
+        }
+    </style>
+
+
+</head>
+
+
+<body class="bg-gradient-to-br from-blue-50 via-white to-blue-100 min-h-screen p-5">
+
+
+    <div class="max-w-md mx-auto">
+
+
+        <!-- Header -->
+
+        <div class="flex items-center gap-3 mb-6">
+
+            <span class="material-symbols-outlined text-4xl text-blue-700">
+                library_books
+            </span>
+
+
+            <div>
+
+                <h1 class="text-2xl font-bold text-gray-800">
+                    Booking Details
+                </h1>
+
+                <p class="text-gray-500 text-sm">
+                    The Titans Library
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+
+
+        <!-- Date Card -->
+
+        <div class="bg-white rounded-2xl shadow-lg p-5 mb-5 border">
+
+
+            <div class="flex items-center gap-3">
+
+
+                <div class="bg-blue-100 p-3 rounded-xl">
+
+                    <span class="material-symbols-outlined text-blue-700">
+                        calendar_month
+                    </span>
+
+                </div>
+
+
+
+                <div>
+
+                    <p class="text-gray-500 text-sm">
+                        Selected Date
+                    </p>
+
+
+                    <h2 id="entryDate" class="text-xl font-bold text-gray-800">
+                        Loading...
+                    </h2>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+
+        <!-- Timing Cards -->
+
+
+        <div class="grid grid-cols-2 gap-4 mb-6">
+
+
+
+            <!-- Entry Time -->
+
+
+            <div class="bg-white rounded-2xl shadow-lg p-4 border">
+
+
+                <div class="bg-green-100 w-12 h-12 flex items-center justify-center rounded-xl mb-3">
+
+                    <span class="material-symbols-outlined text-green-700">
+                        login
+                    </span>
+
+                </div>
+
+
+
+                <p class="text-gray-500 text-sm">
+                    Entry Time
+                </p>
+
+
+                <h2 id="entryTime" class="font-bold text-lg mt-1">
+                    Loading...
+                </h2>
+
+
+
+            </div>
+
+
+
+
+
+            <!-- Exit Time -->
+
+
+            <div class="bg-white rounded-2xl shadow-lg p-4 border">
+
+
+                <div class="bg-red-100 w-12 h-12 flex items-center justify-center rounded-xl mb-3">
+
+                    <span class="material-symbols-outlined text-red-700">
+                        logout
+                    </span>
+
+                </div>
+
+
+
+                <p class="text-gray-500 text-sm">
+                    Exit Time
+                </p>
+
+
+                <h2 id="exitTime" class="font-bold text-lg mt-1">
+                    Loading...
+                </h2>
+
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+        <!-- Confirm Button -->
+
+
+        <button onclick="back()"
+            class="w-full bg-blue-700 hover:bg-blue-800 text-white py-4 rounded-2xl font-bold shadow-lg transition">
+
+
+            Back
+
+
+        </button>
+
+
+
+    </div>
+
+
+
+
+
+
+
+    <script>
+
+
+        let date = localStorage.getItem("selectedBookingDate");
+
+
+
+        document.getElementById("entryDate").innerHTML =
+            date ? date : "Not Selected";
+
+
+
+
+
+        // Database se timing load
+
+        async function loadBookingTime() {
+
+            let email = localStorage.getItem("currentUserEmail");
+
+            let selectedDate = localStorage.getItem("selectedBookingDate");
+
+
+            if (!email || !selectedDate) {
+
+                document.getElementById("entryTime").innerHTML = "Not Present";
+                document.getElementById("exitTime").innerHTML = "Not Present";
+
+                return;
+            }
+
+
+            // date format fix
+            let formattedDate = selectedDate;
+
+
+            try {
+
+
+                let response = await fetch(
+                    `https://the-titans.onrender.com/attendance?email=${encodeURIComponent(email)}&date=${formattedDate}`
+                );
+
+
+                let data = await response.json();
+
+
+
+                if (data.success && data.attendance) {
+
+
+                    document.getElementById("entryTime").innerHTML =
+                        data.attendance.entryTime;
+
+
+                    document.getElementById("exitTime").innerHTML =
+                        data.attendance.exitTime;
+
+
+                }
+                else {
+
+
+                    document.getElementById("entryTime").innerHTML =
+                        "No Entry";
+
+
+                    document.getElementById("exitTime").innerHTML =
+                        "No Exit";
+
+
+                }
+
+
+
+            }
+            catch (error) {
+
+                console.log(error);
+
+
+                document.getElementById("entryTime").innerHTML =
+                    "Not Found";
+
+
+                document.getElementById("exitTime").innerHTML =
+                    "Not Found";
+
+            }
+
+        }
+
+
+        loadBookingTime();
+
+
+
+
+
+
+        function back() {
+            window.history.back();
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>

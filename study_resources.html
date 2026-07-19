@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Titans Library - Study Resources</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Work+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#17324d",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#e9f1ff",
+                        "on-tertiary-container": "#868474",
+                        "on-primary-fixed": "#0f1c2c",
+                        "surface-container": "#e5efff",
+                        "outline": "#74777d",
+                        "tertiary-fixed": "#e6e3d0",
+                        "surface-tint": "#525f71",
+                        "on-surface": "#001d36",
+                        "on-primary-container": "#778598",
+                        "on-primary-fixed-variant": "#3a4859",
+                        "secondary-container": "#fed488",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#bac8dc",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#0f1c2c",
+                        "surface": "#f8f9ff",
+                        "secondary": "#775a19",
+                        "on-surface-variant": "#44474c",
+                        "on-secondary-fixed": "#261900",
+                        "tertiary-container": "#1c1c11",
+                        "surface-container-highest": "#d1e4ff",
+                        "secondary-fixed": "#ffdea5",
+                        "surface-variant": "#d1e4ff",
+                        "surface-dim": "#c2dcff",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#c4c6cc",
+                        "on-tertiary-fixed": "#1c1c11",
+                        "tertiary": "#000000",
+                        "on-tertiary-fixed-variant": "#48473a",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#bac8dc",
+                        "error": "#ba1a1a",
+                        "secondary-fixed-dim": "#e9c176",
+                        "primary": "#000000",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#eef4ff",
+                        "surface-container-high": "#dbe9ff",
+                        "surface-bright": "#f8f9ff",
+                        "tertiary-fixed-dim": "#c9c7b5",
+                        "on-secondary-container": "#785a1a",
+                        "on-background": "#001d36",
+                        "primary-fixed": "#d6e4f9",
+                        "background": "#f8f9ff",
+                        "on-secondary-fixed-variant": "#5d4201",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "sm": "16px",
+                        "margin-desktop": "80px",
+                        "gutter": "24px",
+                        "base": "4px",
+                        "md": "24px",
+                        "margin-mobile": "16px",
+                        "lg": "40px",
+                        "xs": "8px",
+                        "xl": "64px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-sm": ["Work Sans"],
+                        "body-lg": ["Work Sans"],
+                        "label-lg": ["JetBrains Mono"],
+                        "label-md": ["JetBrains Mono"],
+                        "headline-sm": ["Hanken Grotesk"],
+                        "body-md": ["Work Sans"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #F4F1DE; /* Ivory Level 0 */
+            color: #001d36;
+        }
+        .card-level-1 {
+            background-color: #FFFFFF;
+            border: 1px solid rgba(65, 90, 119, 0.2);
+        }
+        .interactive-card:hover {
+            border-color: #C5A059;
+            transition: border-color 0.2s ease-in-out;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md antialiased pb-24 md:pb-0 md:pl-80 flex flex-col min-h-screen">
+<!-- Mobile Top App Bar (Only visible md:hidden) -->
+<header class="md:hidden bg-surface dark:bg-surface-container-high fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 w-full flat no shadows">
+<button class="active:scale-95 transition-transform text-on-surface-variant hover:bg-secondary-container transition-colors duration-200 p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary dark:text-inverse-primary" style="font-variation-settings: 'FILL' 0;">menu_book</span>
+</button>
+<span class="text-headline-sm font-headline-sm font-bold text-primary dark:text-inverse-primary">The Titans Library</span>
+<button class="active:scale-95 transition-transform text-on-surface-variant hover:bg-secondary-container transition-colors duration-200 p-2 rounded-full flex items-center justify-center">
+<span class="text-label-lg font-label-lg text-primary dark:text-inverse-primary">Scan to Enter</span>
+</button>
+</header>
+<!-- Desktop Navigation Drawer (Hidden on mobile) -->
+<aside class="hidden md:flex bg-surface-container-low dark:bg-surface-container-lowest h-full w-80 rounded-r-full shadow-md fixed left-0 top-0 flex-col py-6 z-50">
+<div class="px-6 mb-8 flex flex-col items-start">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden border border-outline-variant">
+<span class="material-symbols-outlined text-on-secondary-container text-2xl">account_circle</span>
+</div>
+<div>
+<h2 class="text-headline-sm font-headline-sm text-primary">Titans Member</h2>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Premium Member</p>
+<p class="text-label-md font-label-md text-outline">Academic Year 2024</p>
+</div>
+</div>
+<h1 class="text-headline-md font-headline-md font-bold text-primary dark:text-inverse-primary mb-2">The Titans Library</h1>
+</div>
+<nav class="flex-1 flex flex-col gap-2 w-full pr-4">
+<a class="flex items-center gap-4 text-on-surface-variant px-4 py-2 mx-2 rounded-full hover:bg-surface-container-high dark:hover:bg-inverse-surface transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined">event_seat</span>
+<span class="text-label-lg font-label-lg">Seat Booking</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant px-4 py-2 mx-2 rounded-full hover:bg-surface-container-high dark:hover:bg-inverse-surface transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-label-lg font-label-lg">Fee Structure</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant px-4 py-2 mx-2 rounded-full hover:bg-surface-container-high dark:hover:bg-inverse-surface transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined">schedule</span>
+<span class="text-label-lg font-label-lg">Shift Timings</span>
+</a>
+<!-- Study Resources active -->
+<a class="flex items-center gap-4 bg-secondary-container text-on-secondary-container font-bold rounded-full mx-2 px-4 py-2 hover:bg-surface-container-high dark:hover:bg-inverse-surface transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+<span class="text-label-lg font-label-lg">Study Resources</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant px-4 py-2 mx-2 rounded-full hover:bg-surface-container-high dark:hover:bg-inverse-surface transition-all duration-300 ease-in-out mt-auto" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-label-lg font-label-lg">Settings</span>
+</a>
+</nav>
+</aside>
+<!-- Main Canvas -->
+<main class="flex-1 px-margin-mobile md:px-margin-desktop py-8 md:py-12 mt-16 md:mt-0 flex flex-col gap-gutter max-w-7xl mx-auto w-full">
+<!-- Header Section -->
+<div class="mb-lg">
+<h1 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg-mobile md:font-headline-lg text-primary mb-2">Study Hub</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant max-w-2xl">Curated resources, academic journals, and tools designed to optimize your focus sessions at The Titans Library.</p>
+</div>
+<!-- Search Bar -->
+<div class="w-full relative group mb-md">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-secondary transition-colors">search</span>
+<input class="w-full pl-12 pr-4 py-4 card-level-1 rounded-xl text-body-lg font-body-lg focus:outline-none focus:ring-2 focus:ring-secondary transition-all w-full placeholder-outline-variant" placeholder="Search digital catalog, journals, or resources..." type="text"/>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Academic Journals (Takes 8 cols on desktop) -->
+<div class="md:col-span-8 card-level-1 rounded-xl p-md flex flex-col">
+<div class="flex items-center justify-between mb-6 border-b border-surface-container-high pb-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-2xl">auto_stories</span>
+<h2 class="text-headline-sm font-headline-sm text-primary">Academic Journals &amp; Databases</h2>
+</div>
+<button class="text-label-md font-label-md text-secondary hover:underline">View All</button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-sm flex-1">
+<a class="interactive-card flex items-start gap-4 p-4 rounded-lg bg-surface-container-low transition-colors" href="#">
+<div class="w-10 h-10 rounded bg-white flex items-center justify-center shrink-0 border border-outline-variant">
+<span class="material-symbols-outlined text-primary">science</span>
+</div>
+<div>
+<h3 class="text-body-md font-body-md font-semibold text-primary mb-1">JSTOR Database</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant line-clamp-2">Access scholarly literature in the humanities, social sciences, and sciences.</p>
+</div>
+</a>
+<a class="interactive-card flex items-start gap-4 p-4 rounded-lg bg-surface-container-low transition-colors" href="#">
+<div class="w-10 h-10 rounded bg-white flex items-center justify-center shrink-0 border border-outline-variant">
+<span class="material-symbols-outlined text-primary">gavel</span>
+</div>
+<div>
+<h3 class="text-body-md font-body-md font-semibold text-primary mb-1">LexisNexis</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant line-clamp-2">Comprehensive legal research, news, and business intelligence.</p>
+</div>
+</a>
+<a class="interactive-card flex items-start gap-4 p-4 rounded-lg bg-surface-container-low transition-colors" href="#">
+<div class="w-10 h-10 rounded bg-white flex items-center justify-center shrink-0 border border-outline-variant">
+<span class="material-symbols-outlined text-primary">biotech</span>
+</div>
+<div>
+<h3 class="text-body-md font-body-md font-semibold text-primary mb-1">PubMed Central</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant line-clamp-2">Free full-text archive of biomedical and life sciences journal literature.</p>
+</div>
+</a>
+<a class="interactive-card flex items-start gap-4 p-4 rounded-lg bg-surface-container-low transition-colors" href="#">
+<div class="w-10 h-10 rounded bg-white flex items-center justify-center shrink-0 border border-outline-variant">
+<span class="material-symbols-outlined text-primary">calculate</span>
+</div>
+<div>
+<h3 class="text-body-md font-body-md font-semibold text-primary mb-1">IEEE Xplore</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant line-clamp-2">Research and standards in computer science and electrical engineering.</p>
+</div>
+</a>
+</div>
+</div>
+<!-- Library Announcements (Takes 4 cols on desktop) -->
+<div class="md:col-span-4 card-level-1 rounded-xl p-md flex flex-col">
+<div class="flex items-center gap-3 mb-6 border-b border-surface-container-high pb-4">
+<span class="material-symbols-outlined text-primary text-2xl">campaign</span>
+<h2 class="text-headline-sm font-headline-sm text-primary">Announcements</h2>
+</div>
+<div class="flex flex-col gap-4 overflow-y-auto max-h-[400px] pr-2">
+<div class="p-4 bg-secondary-container/20 border border-secondary/30 rounded-lg">
+<div class="flex items-center gap-2 mb-2">
+<span class="px-2 py-0.5 bg-secondary text-white text-label-md font-label-md rounded">MAINTENANCE</span>
+<span class="text-label-md font-label-md text-outline">Oct 24, 2024</span>
+</div>
+<h4 class="text-body-md font-body-md font-semibold text-primary mb-1">Network Upgrade</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Brief Wi-Fi interruption expected between 2:00 AM - 4:00 AM in Zone B.</p>
+</div>
+<div class="p-4 border border-outline-variant rounded-lg">
+<div class="flex items-center gap-2 mb-2">
+<span class="px-2 py-0.5 bg-surface-tint text-white text-label-md font-label-md rounded">HOURS</span>
+<span class="text-label-md font-label-md text-outline">Oct 20, 2024</span>
+</div>
+<h4 class="text-body-md font-body-md font-semibold text-primary mb-1">Diwali Schedule</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant">The library will close early at 6:00 PM on October 31st.</p>
+</div>
+</div>
+</div>
+<!-- Focus Playlists (Full width, or split if needed) -->
+<div class="md:col-span-12 card-level-1 rounded-xl p-md">
+<div class="flex items-center justify-between mb-6 border-b border-surface-container-high pb-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-2xl">headphones</span>
+<h2 class="text-headline-sm font-headline-sm text-primary">Titans Recommendations: Focus Audio</h2>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-md">
+<div class="group cursor-pointer">
+<div class="relative w-full aspect-video rounded-lg overflow-hidden mb-3 border border-outline-variant group-hover:border-secondary transition-colors">
+<div class="bg-cover bg-center w-full h-full absolute inset-0 z-0" data-alt="A minimalist, modern workspace setting featuring a clean desk, a glowing laptop screen, and a steaming cup of coffee. The lighting is soft and natural, streaming from an unseen window. The color palette emphasizes ivory, navy, and subtle gold accents. The mood is calm, focused, and productive, reflecting a premium study environment." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCc0Az793-UO0ztRGjwU_OuZh8r0m53ttCdlstJQLs8eVzixOMZFWKvVLCdptFXstRh0ZeJvWe0DsogD7y9PJ77PC6ia1L3GIYOCozHMPQ-f_mZFEJtTd8uQYW9yBykRikNbELut5wenQq2BlSBXXCZ0AGM07QF4l_s8xzs3ptajaCXKbWFQJF7ZygBapLQoMH3_5VKqBiYGr4ao1H3LPnNUdAXnQ-G5I7KmNMBvNPg3DEiOLYtsrHO')"></div>
+<div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors z-10 flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-4xl opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all drop-shadow-md">play_circle</span>
+</div>
+</div>
+<h3 class="text-body-md font-body-md font-semibold text-primary">Deep Work &amp; Flow State</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Binaural beats and ambient drones.</p>
+</div>
+<div class="group cursor-pointer">
+<div class="relative w-full aspect-video rounded-lg overflow-hidden mb-3 border border-outline-variant group-hover:border-secondary transition-colors">
+<div class="bg-cover bg-center w-full h-full absolute inset-0 z-0" data-alt="A macro shot of rain trickling down a glass windowpane, with blurry, warm city lights in the distant background. The scene is slightly moody and atmospheric, focusing on deep blues and soft golden glows. The aesthetic is cozy and isolating, perfect for a Lo-Fi study session visual." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAhcE1kzmPWowQSPQaUd87BL2U0iNoP0RTNLSn4K6yxV6BW5A-1IdLzr4RaGpH2MHzcg-H44cG2XlpBSdGJfICv-FwTKMYswi97FVcqgYCBXeNvCOwB3L86dVeoduXfOgN5_OVhQCDpSuC-EbmgzZfDXi5eVhxbKrNOhzkbj7oAeGX1_MWitTKfeoUSbOo0NZVna74wag1-wv2wKZswQD7gnZH7N705hEUYZEBggrs7ZHwdD7opqhSz')"></div>
+<div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors z-10 flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-4xl opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all drop-shadow-md">play_circle</span>
+</div>
+</div>
+<h3 class="text-body-md font-body-md font-semibold text-primary">Lo-Fi Cafe Atmosphere</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Mellow beats with gentle background noise.</p>
+</div>
+<div class="group cursor-pointer">
+<div class="relative w-full aspect-video rounded-lg overflow-hidden mb-3 border border-outline-variant group-hover:border-secondary transition-colors">
+<div class="bg-cover bg-center w-full h-full absolute inset-0 z-0" data-alt="An abstract, classical music visualization. Soft, sweeping curves in shades of gold and deep navy blue flow across a light ivory background. The composition is elegant, rhythmic, and harmonious, evoking the feeling of a grand orchestral performance in a modern, minimalist concert hall." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC6Y_BnYyJpRdiTM_1ErDbWhBCZoJRSJPuqDEEyOu1bcrPRwkQJFAPwWs1qn45IAz5XcmSBmBzgwXJMLM0SULb1ZlUfj8llYp9yaO8vFn17TAmAjGN7UJdtjq57p5A4pvHE1xCQpz5Wg-6JPoaL6SF3IF5o-x9XvNc94lAEZjaJaQAhJncYoKneSmjNXpVLKQzD17EzgArsa0CMAGBPg99X5WSEvuEz6NgN1P37nrD5hcmTR02TeSUZ')"></div>
+<div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors z-10 flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-4xl opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all drop-shadow-md">play_circle</span>
+</div>
+</div>
+<h3 class="text-body-md font-body-md font-semibold text-primary">Classical Focus</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Baroque and minimalist classical compositions.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Mobile Bottom Nav Bar (Only visible md:hidden) -->
+<nav class="md:hidden bg-surface dark:bg-inverse-surface fixed bottom-0 w-full z-50 flex justify-around items-center h-20 px-4 shadow-sm">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-secondary active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-label-md font-label-md mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-secondary active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="text-label-md font-label-md mt-1">History</span>
+</a>
+<!-- Using Study as 'Home' for mobile context, or leaving Profile as fallback if strict mapping required. Since 'Study Resources' isn't in bottom nav, we highlight nothing or home. Let's keep them inactive as it's a sub-page for mobile bottom nav context, or map to Home. We'll map nothing as per intent fallback if it doesn't match perfectly, but JSON says 3 tabs. Let's make none active. -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-secondary active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-label-md font-label-md mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

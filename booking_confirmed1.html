@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html class="h-full" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>The Titans Library - Booking Confirmed</title>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700&family=Work+Sans:wght@400&family=JetBrains+Mono:wght@500&display=swap"
+        rel="stylesheet" />
+
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "inverse-surface": "#17324d",
+                        "on-tertiary": "#ffffff",
+                        "surface": "#f8f9ff",
+                        "on-secondary-container": "#785a1a",
+                        "on-primary-fixed-variant": "#3a4859",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#0f1c2c",
+                        "surface-tint": "#525f71",
+                        "on-secondary-fixed": "#261900",
+                        "surface-dim": "#c2dcff",
+                        "primary-fixed": "#d6e4f9",
+                        "outline": "#74777d",
+                        "on-secondary-fixed-variant": "#5d4201",
+                        "outline-variant": "#c4c6cc",
+                        "on-surface": "#001d36",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#bac8dc",
+                        "tertiary-fixed-dim": "#c9c7b5",
+                        "inverse-primary": "#bac8dc",
+                        "surface-container-highest": "#d1e4ff",
+                        "on-surface-variant": "#44474c",
+                        "tertiary-container": "#1c1c11",
+                        "tertiary": "#000000",
+                        "secondary-container": "#fed488",
+                        "on-primary-container": "#778598",
+                        "surface-variant": "#d1e4ff",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#e6e3d0",
+                        "surface-container": "#e5efff",
+                        "secondary": "#775a19",
+                        "on-tertiary-container": "#868474",
+                        "error-container": "#ffdad6",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#e9f1ff",
+                        "primary-container": "#0f1c2c",
+                        "background": "#f8f9ff",
+                        "on-primary": "#ffffff",
+                        "on-background": "#001d36",
+                        "secondary-fixed-dim": "#e9c176",
+                        "primary": "#000000",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#1c1c11",
+                        "surface-container-low": "#eef4ff",
+                        "secondary-fixed": "#ffdea5",
+                        "surface-bright": "#f8f9ff",
+                        "surface-container-high": "#dbe9ff",
+                        "on-tertiary-fixed-variant": "#48473a",
+                        "success": "#2e7d32",
+                        "success-container": "#d8f8d8"
+                    },
+
+                    borderRadius: {
+                        DEFAULT: "0.125rem",
+                        lg: "0.25rem",
+                        xl: "0.5rem",
+                        full: "0.75rem"
+                    },
+
+                    spacing: {
+                        sm: "16px",
+                        lg: "40px",
+                        xl: "64px",
+                        xs: "8px",
+                        "margin-desktop": "80px",
+                        "margin-mobile": "16px",
+                        base: "4px",
+                        gutter: "24px",
+                        md: "24px"
+                    },
+
+                    fontFamily: {
+                        "headline-lg": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "headline-sm": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "body-md": ["Work Sans"],
+                        "body-sm": ["Work Sans"],
+                        "body-lg": ["Work Sans"],
+                        "label-lg": ["JetBrains Mono"],
+                        "label-md": ["JetBrains Mono"]
+                    },
+
+                    fontSize: {
+                        "headline-md": ["28px", {
+                            lineHeight: "36px",
+                            fontWeight: "600"
+                        }],
+
+                        "headline-sm": ["20px", {
+                            lineHeight: "28px",
+                            fontWeight: "600"
+                        }],
+
+                        "body-md": ["16px", {
+                            lineHeight: "24px"
+                        }],
+
+                        "body-sm": ["14px", {
+                            lineHeight: "20px"
+                        }],
+
+                        "label-lg": ["14px", {
+                            lineHeight: "20px",
+                            letterSpacing: "0.05em"
+                        }]
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html,
+        body {
+            min-height: 100%;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .pulse-success {
+            animation: pulseSuccess 2.5s infinite;
+        }
+
+        @keyframes pulseSuccess {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
+            }
+        }
+    </style>
+
+</head>
+
+<body
+    class="min-h-screen bg-background text-on-background flex flex-col items-center justify-center p-margin-mobile md:p-margin-desktop">
+
+    <main
+        class="w-full max-w-md my-8 bg-surface-container-lowest border border-outline-variant rounded-xl shadow-[0_8px_24px_rgba(13,27,42,0.08)] overflow-hidden">
+
+        <!-- Header -->
+
+        <div
+            class="bg-surface-container-low p-6 flex flex-col items-center text-center relative border-b border-outline-variant">
+
+            <div class="absolute inset-0 opacity-10 pointer-events-none"
+                style="background-image:radial-gradient(circle,#2e7d32 1px,transparent 1px);background-size:16px 16px;">
+            </div>
+
+            <div
+                class="relative w-20 h-20 mb-4 rounded-full bg-success-container flex items-center justify-center pulse-success">
+
+                <span class="material-symbols-outlined text-success"
+                    style="font-size:42px;font-variation-settings:'FILL' 1;">
+                    verified
+                </span>
+
+            </div>
+
+            <h1 class="font-headline-md text-headline-md text-on-surface mb-2 relative z-10">
+                Booking Confirmed
+            </h1>
+
+            <p class="font-body-md text-body-md text-on-surface-variant max-w-xs relative z-10">
+                Your library seat has been successfully booked.
+                Your access will automatically begin on your booking start date.
+            </p>
+
+        </div>
+
+        <body
+            class="min-h-screen overflow-y-auto bg-background text-on-background flex flex-col items-center justify-center p-margin-mobile md:p-margin-desktop antialiased">
+
+            <!-- Main Card -->
+            <main
+                class="w-full max-w-md my-8 bg-surface-container-lowest border border-outline-variant/20 rounded-xl shadow-[0_8px_24px_rgba(13,27,42,0.08)] overflow-hidden">
+
+                <!-- Header -->
+                <div
+                    class="bg-surface-container-low p-6 flex flex-col items-center justify-center text-center relative border-b border-outline-variant/20">
+
+                    <div class="absolute inset-0 opacity-10 pointer-events-none"
+                        style="background-image: radial-gradient(circle at center,#775a19 1px,transparent 1px);background-size:16px 16px;">
+                    </div>
+
+                    <div
+                        class="relative w-20 h-20 mb-4 flex items-center justify-center bg-secondary-container rounded-full pulse-slow shadow-sm">
+
+                        <span class="material-symbols-outlined text-on-secondary-container"
+                            style="font-size:38px;font-variation-settings:'FILL' 1;">
+                            event_available
+                        </span>
+
+                    </div>
+
+                    <h1 class="font-headline-md text-headline-md text-on-surface mb-2 relative z-10">
+                        Booking Confirmed
+                    </h1>
+
+                    <p class="font-body-md text-body-md text-on-surface-variant max-w-xs relative z-10">
+                        Congratulations! Your seat has been successfully reserved.
+                    </p>
+
+                </div>
+
+                <!-- Details -->
+                <div class="p-5 flex flex-col gap-4">
+
+                    <div class="bg-surface p-3 rounded-lg border border-outline-variant/30 flex items-start gap-3">
+
+                        <span class="material-symbols-outlined text-primary mt-1">
+                            calendar_month
+                        </span>
+
+                        <div>
+
+                            <h3 class="font-label-lg text-label-lg text-on-surface uppercase tracking-wider mb-1">
+                                Booking Starts Soon
+                            </h3>
+
+                            <p class="font-body-sm text-body-sm text-on-surface-variant">
+                                Your booking has been approved successfully, but your access period has not started yet.
+                                Please visit the library from your booking start date.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="bg-secondary-container/40 rounded-lg border border-outline-variant/20 p-4 text-center">
+
+                        <span class="material-symbols-outlined text-secondary text-3xl mb-2">
+                            schedule
+                        </span>
+
+                        <h3 class="font-headline-sm text-headline-sm text-on-surface">
+                            Please Wait
+                        </h3>
+
+                        <p class="font-body-sm text-body-sm text-on-surface-variant mt-2">
+                            Your membership will automatically become active on your
+                            <strong>Booking Start Date</strong>.
+                        </p>
+
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="flex flex-col gap-3 mt-3">
+
+                        <button
+                            class="w-full bg-secondary hover:bg-on-secondary-container text-on-secondary font-label-lg text-label-lg py-3 px-5 rounded-lg transition-colors duration-200 flex justify-center items-center gap-2">
+
+                            <span class="material-symbols-outlined">
+                                support_agent
+                            </span>
+
+                            Contact Support
+
+                        </button>
+
+                        <button onclick="logoutUser()"
+                            class="w-full bg-transparent border-2 border-primary hover:border-secondary hover:text-secondary text-primary font-label-lg text-label-lg py-3 px-5 rounded-lg transition-colors duration-200 flex justify-center items-center gap-2">
+
+                            <span class="material-symbols-outlined">
+                                logout
+                            </span>
+
+                            Log Out
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </main>
+
+            <!-- Footer -->
+            <footer class="mt-4 mb-4 text-center font-label-md text-label-md text-outline">
+                <p>The Titans Library © 2026</p>
+            </footer>
+            <script>
+
+                function logoutUser() {
+
+                    // Clear all stored data of this website
+                    localStorage.clear();
+                    sessionStorage.clear();
+
+                    // Redirect to Login Page
+                    window.location.replace("index.html");
+
+                }
+
+            </script>
+
+        </body>
+
+</html>

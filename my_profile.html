@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>User Profile - The Titans Library</title>
+        <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;family=Work+Sans:wght@400&amp;display=swap"
+                rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+                rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+                rel="stylesheet" />
+        <script>
+
+                // Sabse pehle ye
+                if (localStorage.getItem("isLoggedIn") !== "true") {
+                        window.location.replace("index.html");
+                }
+
+                function logoutUser() {
+
+                        document.getElementById("logoutModal").classList.remove("hidden");
+
+                }
+
+
+                function closeLogoutModal() {
+
+                        document.getElementById("logoutModal").classList.add("hidden");
+
+                }
+
+
+                function confirmLogout() {
+
+                        localStorage.removeItem("isLoggedIn");
+                        sessionStorage.clear();
+
+                        window.location.replace("index.html");
+
+                }
+
+        </script>
+        <script id="tailwind-config">
+                tailwind.config = {
+                        darkMode: "class",
+                        theme: {
+                                extend: {
+                                        "colors": {
+                                                "inverse-surface": "#17324d",
+                                                "on-tertiary": "#ffffff",
+                                                "surface": "#f8f9ff",
+                                                "on-secondary-container": "#785a1a",
+                                                "on-primary-fixed-variant": "#3a4859",
+                                                "on-error-container": "#93000a",
+                                                "on-primary-fixed": "#0f1c2c",
+                                                "surface-tint": "#525f71",
+                                                "on-secondary-fixed": "#261900",
+                                                "surface-dim": "#c2dcff",
+                                                "primary-fixed": "#d6e4f9",
+                                                "outline": "#74777d",
+                                                "on-secondary-fixed-variant": "#5d4201",
+                                                "outline-variant": "#c4c6cc",
+                                                "on-surface": "#001d36",
+                                                "on-secondary": "#ffffff",
+                                                "primary-fixed-dim": "#bac8dc",
+                                                "tertiary-fixed-dim": "#c9c7b5",
+                                                "inverse-primary": "#bac8dc",
+                                                "surface-container-highest": "#d1e4ff",
+                                                "on-surface-variant": "#44474c",
+                                                "tertiary-container": "#1c1c11",
+                                                "tertiary": "#000000",
+                                                "secondary-container": "#fed488",
+                                                "on-primary-container": "#778598",
+                                                "surface-variant": "#d1e4ff",
+                                                "error": "#ba1a1a",
+                                                "tertiary-fixed": "#e6e3d0",
+                                                "surface-container": "#e5efff",
+                                                "secondary": "#775a19",
+                                                "on-tertiary-container": "#868474",
+                                                "error-container": "#ffdad6",
+                                                "on-error": "#ffffff",
+                                                "inverse-on-surface": "#e9f1ff",
+                                                "primary-container": "#0f1c2c",
+                                                "background": "#f8f9ff",
+                                                "on-primary": "#ffffff",
+                                                "on-background": "#001d36",
+                                                "secondary-fixed-dim": "#e9c176",
+                                                "primary": "#000000",
+                                                "surface-container-lowest": "#ffffff",
+                                                "on-tertiary-fixed": "#1c1c11",
+                                                "surface-container-low": "#eef4ff",
+                                                "secondary-fixed": "#ffdea5",
+                                                "surface-bright": "#f8f9ff",
+                                                "surface-container-high": "#dbe9ff",
+                                                "on-tertiary-fixed-variant": "#48473a"
+                                        },
+                                        "borderRadius": {
+                                                "DEFAULT": "0.125rem",
+                                                "lg": "0.25rem",
+                                                "xl": "0.5rem",
+                                                "full": "0.75rem"
+                                        },
+                                        "spacing": {
+                                                "sm": "16px",
+                                                "lg": "40px",
+                                                "xl": "64px",
+                                                "xs": "8px",
+                                                "margin-desktop": "80px",
+                                                "margin-mobile": "16px",
+                                                "base": "4px",
+                                                "gutter": "24px",
+                                                "md": "24px"
+                                        },
+                                        "fontFamily": {
+                                                "headline-lg": ["Hanken Grotesk"],
+                                                "body-md": ["Work Sans"],
+                                                "label-lg": ["JetBrains Mono"],
+                                                "body-sm": ["Work Sans"],
+                                                "headline-md": ["Hanken Grotesk"],
+                                                "headline-lg-mobile": ["Hanken Grotesk"],
+                                                "body-lg": ["Work Sans"],
+                                                "label-md": ["JetBrains Mono"],
+                                                "headline-sm": ["Hanken Grotesk"]
+                                        },
+                                        "fontSize": {
+                                                "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                                                "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                                                "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                                                "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                                                "headline-md": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                                                "headline-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                                                "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                                                "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                                                "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }]
+                                        }
+                                }
+                        }
+                }
+        </script>
+        <style>
+                .material-symbols-outlined {
+                        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+                }
+        </style>
+</head>
+
+<body class="bg-background text-on-background antialiased min-h-screen flex flex-col pt-16 pb-20 md:pb-0 md:pl-80">
+        <!-- TopAppBar (Visible on Desktop and Mobile, acting as Header) -->
+        <!-- Top Header -->
+        <header
+                class="fixed top-0 left-0 w-full h-16 z-[100] bg-surface dark:bg-surface-container-high flex items-center px-4 md:px-8 shadow-sm">
+
+                <div class="flex items-center gap-2">
+
+                        <span class="material-symbols-outlined text-primary font-bold">
+                                menu_book
+                        </span>
+
+                        <span
+                                class="text-headline-sm font-headline-sm font-bold text-primary dark:text-inverse-primary">
+                                The Titans Library
+                        </span>
+
+                </div>
+
+        </header>
+        <!-- Desktop Side Navbar -->
+        <aside class="hidden md:flex fixed left-0 top-0 h-screen w-72 bg-surface shadow-lg flex-col z-40 pt-20 ">
+                <div class="px-6 mb-8 flex flex-col left_align">
+                        <img class="w-16 h-16 rounded-full object-cover mb-4 border-2 border-surface-variant"
+                                data-alt="A professional headshot of an academic library member. Clean, modern corporate aesthetic. High-key lighting, professional attire, soft focus background of bookshelves. Ivory and Navy tones."
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfM_w4P4CNZePfBRmJFITfWrJj3W5LqmpgxSwfXxhUqqdnbXpvfd067f_zcfm4aiwpcESNvoyGd99rrcDm1sgGyJWAmxG0h6InSjblEnX6ehTzwLDqUKSkjsft1iTzuZ2glbPglJutuFCyCzSZpCcoo3HsnraVduFrcQXw7Z-wDMwtasSiBjHasGhzKdSILHz_vIM7s1FW-kVSEo34NB3mY4r2V0iWOfMdTRKostJ7U_8os5KDc4F6" />
+                        <span
+                                class="text-headline-sm font-headline-sm text-primary dark:text-inverse-primary font-bold">Titans
+                                Member</span>
+                        <span class="text-body-md font-body-md text-on-surface-variant">Academic Year 2024</span>
+                        <span
+                                class="text-label-md font-label-md bg-secondary-container text-on-secondary-container rounded-full px-2 py-1 inline-block mt-2 w-max">Premium
+                                Member</span>
+                </div>
+
+
+
+                <a href="library_dashboard.html"
+                        class="flex w-full items-center justify-start gap-4 px-6 py-3 text-left hover:bg-error-container">
+
+                        <span class="material-symbols-outlined">
+                                home
+                        </span>
+
+                        Home
+
+                </a>
+
+
+
+                <a href="library_map.html" class="
+flex w-full items-center justify-start gap-4
+px-6 py-3
+text-left
+hover:bg-error-container
+">
+
+                        <span class="material-symbols-outlined">
+                                map
+                        </span>
+
+                        Map
+
+                </a>
+
+
+
+                <a href="my_profile.html" class="
+flex w-full items-center justify-start gap-4
+px-6 py-3
+text-left
+bg-secondary-container
+">
+
+                        <span class="material-symbols-outlined">
+                                person
+                        </span>
+
+                        Profile
+
+                </a>
+
+
+
+                <button onclick="logoutUser()" class="
+                        flex w-full items-center justify-start gap-4
+                        px-6 py-3
+                        text-left
+                        hover:bg-error-container
+                        ">
+
+                        <span class="material-symbols-outlined">
+                                logout
+                        </span>
+
+                        Logout
+
+                </button>
+
+
+        </aside>
+        <!-- Main Content Canvas -->
+        <main class="flex-1 px-margin-mobile md:px-margin-desktop py-lg md:py-xl max-w-7xl mx-auto w-full">
+                <div class="mb-lg">
+                        <h1
+                                class="text-headline-lg-mobile md:text-headline-lg font-headline-lg-mobile md:font-headline-lg text-primary mb-2">
+                                Profile Details</h1>
+                        <p class="text-body-lg font-body-lg text-on-surface-variant">Manage your library membership and
+                                personal information.</p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+                        <!-- Profile Identity Card -->
+                        <div class="lg:col-span-4 flex flex-col gap-gutter">
+                                <div
+                                        class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-md shadow-sm flex flex-col items-center text-center relative overflow-hidden group hover:border-secondary transition-colors duration-300">
+                                        <div
+                                                class="absolute inset-0 bg-gradient-to-br from-surface-container-low to-surface-container-highest opacity-50 pointer-events-none">
+                                        </div>
+                                        <div class="relative z-10 w-32 h-32 mb-6">
+                                                <img id="profileImage"
+                                                        class="w-full h-full rounded-full object-cover border-4 border-surface shadow-md"
+                                                        data-alt="Close up professional portrait of a studious library member. Well lit, high resolution. Modern academic aesthetic. Wearing dark navy clothing against a soft ivory background. Serious but approachable expression."
+                                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWsOSxe9aMzXqQP6SYpR7lL00dGkqPupZIJK31Gx2XaSDuTYn2Y-4XdQDud8F3I_RBcZfcLi45tH0XAJN2Dp759zpJyjnmzEQTxKHXJbCMnY_iIiduaShZHpP4_8AhhYrOIpYueGBcvgW0XQtU8RqecDva8PbakKsc7285H-O1PVydrEA0K31Hz4tRJyx2wOMduBWNPj8YVruQ8T3Y_X9o1O_N0b8hI2r3kn6DFMWDu5eWVllS76-t" />
+                                                <button id="changeImageBtn"
+                                                        class="absolute bottom-0 right-0 bg-primary text-on-primary p-2 rounded-full hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-md">
+                                                        <span
+                                                                class="material-symbols-outlined text-sm">photo_camera</span>
+                                                </button>
+                                                <input type="file" id="imageInput" accept="image/*" class="hidden">
+                                        </div>
+                                        <h2 id="profileName"
+                                                class="text-headline-md font-headline-md text-primary relative z-10">-
+                                        </h2>
+                                        <p id="profileMemberId"
+                                                class="text-body-md font-body-md text-on-surface-variant mb-4 relative z-10">
+                                                -</p>
+                                        <span id="profileBadge"
+                                                class="text-label-md font-label-md rounded-full px-4 py-1 relative z-10 font-bold uppercase tracking-wider mb-6 bg-surface-container-lowest text-on-surface-variant">Member</span>
+                                        <div class="w-full flex flex-col gap-3 relative z-10">
+                                                <button id="openEditModal" type="button"
+                                                        class="w-full bg-primary text-on-primary text-label-lg font-label-lg py-3 rounded-lg hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors flex items-center justify-center gap-2 font-bold">
+                                                        <span class="material-symbols-outlined text-sm">edit</span> Edit
+                                                        Profile
+                                                </button>
+                                                <button type="button" onclick="logoutUser()"
+                                                        class="w-full bg-transparent border border-outline text-primary text-label-lg font-label-lg py-3 rounded-lg hover:border-secondary hover:text-secondary transition-colors flex items-center justify-center gap-2">
+                                                        <span class="material-symbols-outlined text-sm">logout</span>
+                                                        Logout
+                                                </button>
+                                        </div>
+                                </div>
+                        </div>
+                        <!-- Profile Data Bento Grid -->
+                        <div class="lg:col-span-8 flex flex-col gap-gutter">
+                                <!-- Info Grid -->
+                                <div class="grid grid-cols-1 xl:grid-cols-3 gap-gutter">
+                                        <!-- Member Since -->
+                                        <div
+                                                class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-md shadow-sm hover:border-secondary transition-colors duration-300 flex flex-col justify-between min-w-0">
+
+                                                <div class="flex items-center gap-3 mb-4 text-on-surface-variant">
+                                                        <span
+                                                                class="material-symbols-outlined text-secondary">calendar_today</span>
+                                                        <span
+                                                                class="text-label-lg font-label-lg uppercase tracking-wider">
+                                                                Member Since
+                                                        </span>
+                                                </div>
+
+                                                <div>
+                                                        <p id="membershipStartDate"
+                                                                class="text-headline-sm font-headline-sm text-primary">
+                                                                -
+                                                        </p>
+
+                                                        <p
+                                                                class="text-body-sm font-body-sm text-on-surface-variant mt-1">
+                                                                Membership Started
+                                                        </p>
+                                                </div>
+
+                                        </div>
+
+                                        <!-- Membership Expires -->
+                                        <div
+                                                class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-md shadow-sm hover:border-secondary transition-colors duration-300 flex flex-col justify-between min-w-0">
+
+                                                <div class="flex items-center gap-3 mb-4 text-on-surface-variant">
+                                                        <span
+                                                                class="material-symbols-outlined text-secondary">event</span>
+                                                        <span
+                                                                class="text-label-lg font-label-lg uppercase tracking-wider">
+                                                                Membership Expires
+                                                        </span>
+                                                </div>
+
+                                                <div>
+                                                        <p id="membershipEndDate"
+                                                                class="text-headline-sm font-headline-sm text-primary">
+                                                                -
+                                                        </p>
+
+                                                        <p id="renewalText"
+                                                                class="text-body-sm font-body-sm text-on-surface-variant mt-1">
+                                                                -
+                                                        </p>
+                                                </div>
+
+                                        </div>
+
+                                        <!-- Current Shift -->
+                                        <div
+                                                class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-md shadow-sm hover:border-secondary transition-colors duration-300 flex flex-col justify-between relative overflow-hidden min-w-0">
+
+                                                <div
+                                                        class="absolute right-0 top-0 w-24 h-24 bg-secondary-container opacity-20 rounded-bl-full pointer-events-none">
+                                                </div>
+
+                                                <div
+                                                        class="flex items-center gap-3 mb-4 text-on-surface-variant relative z-10">
+                                                        <span
+                                                                class="material-symbols-outlined text-secondary">schedule</span>
+                                                        <span
+                                                                class="text-label-lg font-label-lg uppercase tracking-wider">
+                                                                Current Shift
+                                                        </span>
+                                                </div>
+
+                                                <div class="relative z-10">
+                                                        <p id="profileShiftName"
+                                                                class="text-headline-sm font-headline-sm text-primary">
+                                                                -
+                                                        </p>
+
+                                                        <p id="profileShiftTime"
+                                                                class="text-body-sm font-body-sm text-on-surface-variant mt-1">
+                                                                -
+                                                        </p>
+                                                </div>
+
+                                        </div>
+
+                                </div>
+                        </div>
+                        <!-- Membership Details Card -->
+                        <div
+                                class="w-fit bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-4 sm:p-5 md:p-6 shadow-sm hover:border-secondary transition-all duration-300">
+
+                                <!-- Header -->
+                                <div
+                                        class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-outline-variant/20 pb-4 mb-6">
+
+                                        <div class="flex items-center gap-3">
+                                                <span class="material-symbols-outlined text-secondary text-2xl">
+                                                        card_membership
+                                                </span>
+
+                                                <h3 class="text-xl font-bold text-primary">
+                                                        Membership Details
+                                                </h3>
+                                        </div>
+
+                                        <button
+                                                class="w-full md:w-auto px-4 py-2 border border-secondary rounded-lg text-secondary hover:bg-secondary hover:text-white transition">
+                                                View Plan
+                                        </button>
+
+                                </div>
+
+                                <!-- Details -->
+                                <div class="mb-4 md:mb-0">
+
+                                        <!-- Email -->
+                                        <div>
+                                                <p class="text-xs uppercase text-on-surface-variant mb-2">
+                                                        Registered Email
+                                                </p>
+
+                                                <p id="profileEmail"
+                                                        class="text-primary font-medium whitespace-normal">
+                                                        -
+                                                </p>
+                                        </div><br>
+
+
+                                        <!-- Phone -->
+                                        <div>
+                                                <p class="text-xs uppercase text-on-surface-variant mb-2">
+                                                        Phone Number
+                                                </p>
+
+                                                <p id="profilePhone"
+                                                        class="text-primary font-medium whitespace-normal">
+                                                        -
+                                                </p>
+                                        </div><br>
+
+                                        <!-- Locker -->
+                                        <div>
+                                                <p class="text-xs uppercase text-on-surface-variant mb-2">
+                                                        Locker Assigned
+                                                </p>
+
+                                                <p id="profileLocker" class="text-primary font-medium">
+                                                        Not Assigned
+                                                </p>
+                                        </div><br>
+
+                                        <!-- Status -->
+                                        <div>
+                                                <p class="text-xs uppercase text-on-surface-variant mb-2">
+                                                        Status
+                                                </p>
+
+                                                <div id="profileStatus" class="flex items-center gap-2">
+
+                                                        <span id="profileStatusDot"
+                                                                class="w-2.5 h-2.5 rounded-full bg-gray-400"></span>
+
+                                                        <span class="font-medium">
+                                                                Not Set
+                                                        </span>
+
+                                                </div>
+                                        </div>
+
+                                </div>
+
+                        </div>
+                </div>
+                </div>
+        </main>
+        <!-- BottomNavBar (Visible only on Mobile) -->
+        <nav
+                class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center h-20 px-4 bg-surface dark:bg-inverse-surface shadow-sm z-50">
+                <a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:bg-error-container active:scale-90 transition-transform w-16"
+                        href="library_dashboard.html">
+                        <span class="material-symbols-outlined mb-1">home</span>
+                        <span class="text-label-md font-label-md">Home</span>
+                </a>
+                <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary px-4 py-1 active:scale-90 transition-transform w-20"
+                        href="library_map.html">
+                        <span class="material-symbols-outlined mb-1">map</span>
+                        <span class="font-label-md text-label-md">Map</span>
+                </a>
+                <a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 active:scale-90 transition-transform"
+                        href="my_profile.html">
+                        <span class="material-symbols-outlined mb-1"
+                                style="font-variation-settings: 'FILL' 1;">person</span>
+                        <span class="text-label-md font-label-md font-bold">Profile</span>
+                </a>
+        </nav>
+        <div id="logoutModal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/50">
+
+
+                <div class="bg-white rounded-xl shadow-xl p-6 w-80 text-center">
+
+
+                        <span class="material-symbols-outlined text-red-500 text-5xl">
+                                logout
+                        </span>
+
+
+                        <h2 class="text-xl font-bold mt-3 text-gray-800">
+                                Confirm Logout
+                        </h2>
+
+
+                        <p class="text-gray-600 mt-2">
+                                Are you sure you want to logout?
+                        </p>
+
+
+                        <div class="flex justify-center gap-4 mt-6">
+
+
+                                <!-- Cancel Button -->
+                                <button onclick="closeLogoutModal()"
+                                        class="px-5 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600">
+                                        Cancel
+                                </button>
+
+
+                                <!-- Yes Button -->
+                                <button onclick="confirmLogout()"
+                                        class="px-5 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">
+                                        Yes, Logout
+                                </button>
+
+
+                        </div>
+
+
+                </div>
+
+        </div>
+
+        <div id="editProfileModal" class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/50 px-4">
+                <div class="w-full max-w-xl rounded-2xl bg-surface-container-lowest p-6 shadow-xl">
+                        <div class="flex items-center justify-between mb-6">
+                                <div>
+                                        <h3 class="text-headline-sm font-headline-sm text-primary">Edit Profile</h3>
+                                        <p class="text-body-sm font-body-sm text-on-surface-variant">Update your
+                                                personal details below.</p>
+                                </div>
+                                <button id="closeEditModal" type="button"
+                                        class="rounded-full p-2 text-on-surface-variant hover:bg-surface-container-high transition-colors">
+                                        <span class="material-symbols-outlined">close</span>
+                                </button>
+                        </div>
+                        <div class="max-h-[70vh] overflow-y-auto pr-2">
+                                <form id="profileEditForm" class="space-y-4">
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                                                <label class="block text-sm font-medium text-on-surface-variant">
+                                                        Full Name
+                                                        <input id="editName" type="text"
+                                                                class="mt-1 w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2 text-primary focus:border-secondary focus:outline-none" />
+                                                </label>
+
+                                                <label class="block text-sm font-medium text-on-surface-variant">
+                                                        Member ID
+                                                        <input id="editMemberId" type="text" value="LIB-2024-8901"
+                                                                class="mt-1 w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2 text-primary focus:border-secondary focus:outline-none" />
+                                                </label>
+
+                                                <label class="block text-sm font-medium text-on-surface-variant">
+                                                        Email
+                                                        <input id="editEmail" type="email"
+                                                                value="alex.chen@academic.edu"
+                                                                class="mt-1 w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2 text-primary focus:border-secondary focus:outline-none" />
+                                                </label>
+
+                                                <label class="block text-sm font-medium text-on-surface-variant">
+                                                        Phone
+                                                        <input id="editPhone" type="tel" value=""
+                                                                class="mt-1 w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2 text-primary focus:border-secondary focus:outline-none" />
+                                                </label>
+
+                                                <label class="block text-sm font-medium text-on-surface-variant">
+                                                        Locker
+                                                        <input id="editLocker" type="text" value=""
+                                                                class="mt-1 w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2 text-primary focus:border-secondary focus:outline-none" />
+                                                </label>
+
+                                                <label class="block text-sm font-medium text-on-surface-variant">
+                                                        Status
+                                                        <select id="editStatus"
+                                                                class="mt-1 w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2 text-primary focus:border-secondary focus:outline-none">
+                                                                <option value="Active">Active</option>
+                                                                <option value="Pending">Pending</option>
+                                                                <option value="Inactive">Inactive</option>
+                                                        </select>
+                                                </label>
+
+                                                <label
+                                                        class="block text-sm font-medium text-on-surface-variant md:col-span-2">
+                                                        Current Shift
+                                                        <input id="editShiftName" type="text" value=""
+                                                                class="mt-1 w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2 text-primary focus:border-secondary focus:outline-none" />
+                                                </label>
+
+                                                <label
+                                                        class="block text-sm font-medium text-on-surface-variant md:col-span-2">
+                                                        Shift Time
+                                                        <input id="editShiftTime" type="text"
+                                                                value="08:00 AM - 02:00 PM"
+                                                                class="mt-1 w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2 text-primary focus:border-secondary focus:outline-none" />
+                                                </label>
+
+                                        </div>
+
+                                        <div class="flex justify-end gap-3 pt-2 sticky bottom-0 bg-surface py-3">
+                                                <button id="cancelEditModal" type="button"
+                                                        class="rounded-lg border border-outline px-4 py-2 text-sm font-medium text-primary hover:border-secondary hover:text-secondary transition-colors">
+                                                        Cancel
+                                                </button>
+
+                                                <button type="submit"
+                                                        class="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-on-primary hover:bg-primary-container hover:text-on-primary-container transition-colors">
+                                                        Save Changes
+                                                </button>
+                                        </div>
+                                </form>
+                        </div>
+                </div>
+        </div>
+
+
+        <script>
+                const editProfileModal = document.getElementById('editProfileModal');
+                const openEditModalButton = document.getElementById('openEditModal');
+                const closeEditModalButton = document.getElementById('closeEditModal');
+                const cancelEditModalButton = document.getElementById('cancelEditModal');
+                const profileEditForm = document.getElementById('profileEditForm');
+
+                // Profile Image
+                const changeImageBtn = document.getElementById("changeImageBtn");
+                const imageInput = document.getElementById("imageInput");
+                const profileImage = document.getElementById("profileImage");
+
+                // ---------------- Edit Modal ----------------
+
+                function openEditProfileModal() {
+
+                        // Fill popup with current profile data
+                        document.getElementById("editName").value =
+                                document.getElementById("profileName").textContent.trim();
+
+                        document.getElementById("editMemberId").value =
+                                document.getElementById("profileMemberId").textContent.trim();
+
+                        document.getElementById("editEmail").value =
+                                document.getElementById("profileEmail").textContent.trim();
+
+                        document.getElementById("editPhone").value =
+                                document.getElementById("profilePhone").textContent.trim();
+
+                        const lockerText =
+                                document.getElementById("profileLocker").childNodes[0]?.textContent.trim() || "";
+
+                        document.getElementById("editLocker").value =
+                                lockerText === "Not assigned" ? "" : lockerText;
+
+                        document.getElementById("editShiftName").value =
+                                document.getElementById("profileShiftName").textContent.trim();
+
+                        document.getElementById("editShiftTime").value =
+                                document.getElementById("profileShiftTime").textContent.trim();
+
+                        // Set Status dropdown
+                        const status =
+                                document.getElementById("profileStatus").textContent.trim();
+
+                        if (status.includes("Active")) {
+                                document.getElementById("editStatus").value = "Active";
+                        } else if (status.includes("Pending")) {
+                                document.getElementById("editStatus").value = "Pending";
+                        } else {
+                                document.getElementById("editStatus").value = "Inactive";
+                        }
+
+                        editProfileModal.classList.remove("hidden");
+                        editProfileModal.classList.add("flex");
+                }
+
+                function closeEditProfileModal() {
+                        editProfileModal.classList.add('hidden');
+                        editProfileModal.classList.remove('flex');
+                }
+
+                openEditModalButton?.addEventListener('click', openEditProfileModal);
+                closeEditModalButton?.addEventListener('click', closeEditProfileModal);
+                cancelEditModalButton?.addEventListener('click', closeEditProfileModal);
+
+                editProfileModal?.addEventListener('click', (event) => {
+                        if (event.target === editProfileModal) {
+                                closeEditProfileModal();
+                        }
+                });
+
+                // ---------------- Save Profile ----------------
+
+                profileEditForm?.addEventListener('submit', (event) => {
+
+                        event.preventDefault();
+
+                        document.getElementById('profileName').textContent =
+                                document.getElementById('editName').value;
+
+                        document.getElementById('profileMemberId').textContent =
+                                document.getElementById('editMemberId').value;
+
+                        document.getElementById('profileEmail').textContent =
+                                document.getElementById('editEmail').value;
+
+                        document.getElementById('profilePhone').textContent =
+                                document.getElementById('editPhone').value;
+
+                        document.getElementById('profileLocker').innerHTML =
+                                `${document.getElementById('editLocker').value}
+                                <span class="material-symbols-outlined text-sm text-secondary">lock</span>`;
+
+                        document.getElementById('profileStatus').innerHTML =
+                                `<span class="w-2 h-2 rounded-full bg-secondary"></span>
+                                ${document.getElementById('editStatus').value}`;
+
+                        document.getElementById('profileShiftName').textContent =
+                                document.getElementById('editShiftName').value;
+
+                        document.getElementById('profileShiftTime').textContent =
+                                document.getElementById('editShiftTime').value;
+
+                        closeEditProfileModal();
+
+                });
+
+                // ---------------- Change Profile Image ----------------
+
+                if (changeImageBtn && imageInput && profileImage) {
+
+                        changeImageBtn.addEventListener("click", function () {
+                                imageInput.click();
+                        });
+
+                        imageInput.addEventListener("change", function () {
+
+                                const file = this.files[0];
+
+                                if (!file) return;
+
+                                const reader = new FileReader();
+
+                                reader.onload = function (e) {
+                                        profileImage.src = e.target.result;
+                                };
+
+                                reader.readAsDataURL(file);
+
+                        });
+
+                }
+
+                // ---------------- Load Profile ----------------
+                function loadProfile() {
+                        // Try to load from localStorage first
+                        try {
+                                const raw = localStorage.getItem('currentUser') || localStorage.getItem('userProfile');
+                                if (raw) {
+                                        const user = JSON.parse(raw);
+                                        applyProfile(user);
+                                        return;
+                                }
+
+                                // If no local profile, try fetching from backend using saved email
+                                const email = localStorage.getItem('currentUserEmail');
+                                if (email) {
+                                        fetch(`https://the-titans.onrender.com/user?email=${encodeURIComponent(email)}`)
+                                                .then(r => r.json())
+                                                .then(result => {
+                                                        if (result && result.success && result.user) {
+                                                                localStorage.setItem('currentUser', JSON.stringify(result.user));
+                                                                applyProfile(result.user);
+                                                        }
+                                                }).catch(err => console.warn('Profile fetch failed', err));
+                                }
+                        } catch (e) {
+                                console.warn('No stored profile found', e);
+                        }
+                }
+
+                function applyProfile(user) {
+
+                        document.getElementById("profileName").textContent =
+                                user.fullName || "-";
+
+                        document.getElementById("profileMemberId").textContent =
+                                user.id || "-";
+
+                        document.getElementById("profileEmail").textContent =
+                                user.email || "-";
+
+                        document.getElementById("profilePhone").textContent =
+                                user.mobileNumber || "-";
+
+                        const booking = user.booking || {};
+
+                        //-------------------------------
+                        // Locker
+                        //-------------------------------
+
+                        if (booking.locker) {
+
+                                document.getElementById("profileLocker").innerHTML =
+                                        `Yes <span class="material-symbols-outlined text-sm text-secondary">lock</span>`;
+
+                        } else {
+
+                                document.getElementById("profileLocker").textContent =
+                                        "No";
+
+                        }
+
+                        //-------------------------------
+                        // Status
+                        //-------------------------------
+
+                        const status = booking.status || "Inactive";
+
+                        document.getElementById("profileStatus").innerHTML =
+                                `<span class="w-2 h-2 rounded-full ${status == "Booked" ? "bg-green-500" : "bg-gray-400"
+                                }"></span> ${status}`;
+
+                        //-------------------------------
+                        // End Date
+                        //-------------------------------
+
+                        //-------------------------------
+                        // Membership Dates
+                        //-------------------------------
+
+                        // Start Date (Member Since)
+
+                        document.getElementById("membershipStartDate").textContent =
+                                booking.startDate || "-";
+
+                        // End Date (Membership Expires)
+
+                        document.getElementById("membershipEndDate").textContent =
+                                booking.endDate || "-";
+
+                        // Renewal Logic
+
+                        if (booking.endDate) {
+
+                                const today = new Date();
+                                const endDate = new Date(booking.endDate);
+
+                                let months =
+                                        (endDate.getFullYear() - today.getFullYear()) * 12 +
+                                        (endDate.getMonth() - today.getMonth());
+
+                                if (endDate.getDate() < today.getDate()) {
+                                        months--;
+                                }
+
+                                months = Math.max(0, months);
+
+                                document.getElementById("renewalText").textContent =
+                                        `Renewal due in ${months} month${months !== 1 ? "s" : ""}`;
+
+                        } else {
+
+                                document.getElementById("renewalText").textContent = "-";
+
+                        }
+
+                        //-------------------------------
+                        // Shift
+                        //-------------------------------
+
+                        const shiftMap = {
+
+                                "4hours_morning": {
+                                        name: "04 Hours",
+                                        time: "07:00 AM - 11:00 AM"
+                                },
+
+                                "7hours_evening": {
+                                        name: "07 Hours",
+                                        time: "03:00 PM - 10:00 PM"
+                                },
+
+                                "8hours_morning": {
+                                        name: "08 Hours",
+                                        time: "07:00 AM - 03:00 PM"
+                                },
+
+                                "8hours_evening": {
+                                        name: "08 Hours",
+                                        time: "11:00 AM - 07:00 PM"
+                                },
+
+                                "11hours": {
+                                        name: "11 Hours",
+                                        time: "11:00 AM - 10:00 PM"
+                                },
+
+                                "12hours": {
+                                        name: "12 Hours",
+                                        time: "07:00 AM - 07:00 PM"
+                                },
+
+                                "15hours": {
+                                        name: "15 Hours",
+                                        time: "07:00 AM - 10:00 PM"
+                                }
+
+                        };
+
+                        if (booking.shift && shiftMap[booking.shift]) {
+
+                                document.getElementById("profileShiftName").textContent =
+                                        shiftMap[booking.shift].name;
+
+                                document.getElementById("profileShiftTime").textContent =
+                                        shiftMap[booking.shift].time;
+
+                        } else {
+
+                                document.getElementById("profileShiftName").textContent = "-";
+                                document.getElementById("profileShiftTime").textContent = "-";
+
+                        }
+
+                }
+
+                // run on load
+                loadProfile();
+        </script>
+</body>
+
+</html>

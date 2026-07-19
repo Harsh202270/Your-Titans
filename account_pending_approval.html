@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Titans Library - Membership Required</title>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#0D1B2A",
+                        secondary: "#C5A059",
+                        background: "#F4F1DE",
+                        surface: "#FFFFFF",
+                        card: "#FAFAFA",
+                        border: "#D9D9D9",
+                        text: "#0D1B2A",
+                        muted: "#5F6B7A",
+                        success: "#16A34A",
+                        warning: "#F59E0B",
+                        danger: "#DC2626"
+                    },
+
+                    fontFamily: {
+                        heading: ["Hanken Grotesk"],
+                        body: ["Work Sans"],
+                        label: ["JetBrains Mono"]
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background: #F4F1DE;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 1,
+                'wght' 500,
+                'GRAD' 0,
+                'opsz' 24;
+        }
+
+        .hero-glow {
+            animation: pulseGlow 2.5s infinite;
+        }
+
+        @keyframes pulseGlow {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.05);
+                opacity: .85;
+            }
+        }
+    </style>
+
+</head>
+
+<body class="font-body text-text min-h-screen">
+
+    <!-- Header -->
+
+    <header class="bg-white shadow-sm border-b">
+
+        <div class="max-w-5xl mx-auto px-4 md:px-6 py-4 flex items-center">
+
+            <div class="flex items-center gap-3">
+
+                <div class="w-11 h-11 rounded-full bg-secondary flex items-center justify-center shadow">
+
+                    <span class="material-symbols-outlined text-primary text-2xl">
+                        local_library
+                    </span>
+
+                </div>
+
+                <div>
+
+                    <h1 class="text-xl md:text-2xl font-heading font-bold">
+                        The Titans Library
+                    </h1>
+
+                    <p class="text-xs md:text-sm text-muted">
+                        Membership Portal
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- Main -->
+
+    <main class="max-w-5xl mx-auto px-4 md:px-6 py-5 md:py-8">
+
+        <!-- Hero Card -->
+
+        <section class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
+
+            <div class="bg-primary text-white px-5 py-6 text-center">
+
+                <div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-secondary mx-auto flex items-center justify-center hero-glow">
+
+                    <span class="material-symbols-outlined text-primary"
+                        style="font-size:42px;">
+                        lock_person
+                    </span>
+
+                </div>
+
+                <h2 class="text-2xl md:text-4xl font-heading font-bold mt-4">
+                    Membership Required
+                </h2>
+
+                <p class="text-sm md:text-base mt-2 text-gray-300 max-w-xl mx-auto leading-relaxed">
+                    You don't have an active Titans Library membership.
+                    Access to QR Scan Entry and other member facilities is
+                    currently unavailable.
+                </p>
+
+            </div>
+
+            <!-- Status Cards -->
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 p-5">
+                                <!-- Membership Status -->
+
+                <div class="bg-card border border-gray-200 rounded-xl p-4">
+
+                    <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center mb-3">
+
+                        <span class="material-symbols-outlined text-red-600">
+                            person_off
+                        </span>
+
+                    </div>
+
+                    <h3 class="text-lg font-heading font-semibold">
+                        Membership Status
+                    </h3>
+
+                    <p class="text-sm text-muted mt-2">
+                        Your account doesn't have an active membership.
+                    </p>
+
+                    <span class="inline-block mt-4 px-3 py-1 rounded-full bg-red-100 text-red-700 text-xs font-semibold">
+                        NOT ACTIVE
+                    </span>
+
+                </div>
+
+                <!-- Scan Access -->
+
+                <div class="bg-card border border-gray-200 rounded-xl p-4">
+
+                    <div class="w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center mb-3">
+
+                        <span class="material-symbols-outlined text-yellow-600">
+                            qr_code_scanner
+                        </span>
+
+                    </div>
+
+                    <h3 class="text-lg font-heading font-semibold">
+                        Scan Access
+                    </h3>
+
+                    <p class="text-sm text-muted mt-2">
+                        QR code scanning is disabled until membership activation.
+                    </p>
+
+                    <span class="inline-block mt-4 px-3 py-1 rounded-full bg-yellow-100 text-yellow-700 text-xs font-semibold">
+                        DISABLED
+                    </span>
+
+                </div>
+
+                <!-- Next Step -->
+
+                <div class="bg-card border border-gray-200 rounded-xl p-4">
+
+                    <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mb-3">
+
+                        <span class="material-symbols-outlined text-green-600">
+                            workspace_premium
+                        </span>
+
+                    </div>
+
+                    <h3 class="text-lg font-heading font-semibold">
+                        Next Step
+                    </h3>
+
+                    <p class="text-sm text-muted mt-2">
+                        Buy a membership and wait for admin approval.
+                    </p>
+
+                    <span class="inline-block mt-4 px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-semibold">
+                        BUY MEMBERSHIP
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Information -->
+
+        <section class="mt-6 bg-white rounded-2xl shadow border border-gray-200 p-5">
+
+            <h3 class="text-2xl font-heading font-bold mb-5">
+                How to Get Access
+            </h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                <!-- Step 1 -->
+
+                <div class="flex gap-3">
+
+                    <div class="w-10 h-10 rounded-full bg-secondary flex items-center justify-center shrink-0">
+
+                        <span class="material-symbols-outlined text-primary">
+                            payments
+                        </span>
+
+                    </div>
+
+                    <div>
+
+                        <h4 class="font-semibold">
+                            Choose a Plan
+                        </h4>
+
+                        <p class="text-sm text-muted mt-1">
+                            Select the membership plan suitable for your study schedule.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- Step 2 -->
+
+                <div class="flex gap-3">
+
+                    <div class="w-10 h-10 rounded-full bg-secondary flex items-center justify-center shrink-0">
+
+                        <span class="material-symbols-outlined text-primary">
+                            credit_card
+                        </span>
+
+                    </div>
+
+                    <div>
+
+                        <h4 class="font-semibold">
+                            Complete Payment
+                        </h4>
+
+                        <p class="text-sm text-muted mt-1">
+                            Pay securely to submit your membership request.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- Step 3 -->
+
+                <div class="flex gap-3">
+
+                    <div class="w-10 h-10 rounded-full bg-secondary flex items-center justify-center shrink-0">
+
+                        <span class="material-symbols-outlined text-primary">
+                            pending_actions
+                        </span>
+
+                    </div>
+
+                    <div>
+
+                        <h4 class="font-semibold">
+                            Wait for Approval
+                        </h4>
+
+                        <p class="text-sm text-muted mt-1">
+                            Your application will be reviewed by the library administrator.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- Step 4 -->
+
+                <div class="flex gap-3">
+
+                    <div class="w-10 h-10 rounded-full bg-secondary flex items-center justify-center shrink-0">
+
+                        <span class="material-symbols-outlined text-primary">
+                            verified
+                        </span>
+
+                    </div>
+
+                    <div>
+
+                        <h4 class="font-semibold">
+                            Start Using Library
+                        </h4>
+
+                        <p class="text-sm text-muted mt-1">
+                            After approval, QR Scan Entry and all member services will be enabled.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+                <!-- Action Buttons -->
+
+        <section class="mt-6">
+
+            <div class="bg-white rounded-2xl shadow border border-gray-200 p-5">
+
+                <h3 class="text-xl font-heading font-bold text-center mb-5">
+                    Quick Actions
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+
+                    <!-- Buy Membership -->
+
+                    <button
+                        onclick="window.location.href='seat_booking.html'"
+                        class="bg-secondary hover:bg-yellow-600 transition text-primary font-semibold py-3 rounded-xl flex items-center justify-center gap-2">
+
+                        <span class="material-symbols-outlined">
+                            workspace_premium
+                        </span>
+
+                        Buy Membership
+
+                    </button>
+
+                    <!-- Contact -->
+
+                    <button
+                        onclick="window.location.href='contact.html'"
+                        class="border-2 border-primary text-primary hover:bg-primary hover:text-white transition font-semibold py-3 rounded-xl flex items-center justify-center gap-2">
+
+                        <span class="material-symbols-outlined">
+                            support_agent
+                        </span>
+
+                        Contact Support
+
+                    </button>
+
+                    <!-- Logout -->
+
+                    <button
+                        onclick="logoutUser()"
+                        class="bg-red-600 hover:bg-red-700 text-white transition font-semibold py-3 rounded-xl flex items-center justify-center gap-2">
+
+                        <span class="material-symbols-outlined">
+                            logout
+                        </span>
+
+                        Logout
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+
+    <footer class="mt-6 bg-white border-t">
+
+        <div class="max-w-6xl mx-auto py-4 px-4 text-center">
+
+            <p class="text-sm text-gray-500">
+                © 2026 The Titans Library. All Rights Reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+    <script>
+
+        function logoutUser() {
+
+            localStorage.clear();
+            sessionStorage.clear();
+
+            window.location.replace("index.html");
+
+        }
+
+    </script>
+
+</body>
+
+</html>

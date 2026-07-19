@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html class="h-full" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>The Titans Library - Booking Expired</title>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700&family=Work+Sans:wght@400&family=JetBrains+Mono:wght@500&display=swap"
+        rel="stylesheet" />
+
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "inverse-surface": "#17324d",
+                        "on-tertiary": "#ffffff",
+                        "surface": "#f8f9ff",
+                        "on-secondary-container": "#785a1a",
+                        "on-primary-fixed-variant": "#3a4859",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#0f1c2c",
+                        "surface-tint": "#525f71",
+                        "on-secondary-fixed": "#261900",
+                        "surface-dim": "#c2dcff",
+                        "primary-fixed": "#d6e4f9",
+                        "outline": "#74777d",
+                        "on-secondary-fixed-variant": "#5d4201",
+                        "outline-variant": "#c4c6cc",
+                        "on-surface": "#001d36",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#bac8dc",
+                        "tertiary-fixed-dim": "#c9c7b5",
+                        "inverse-primary": "#bac8dc",
+                        "surface-container-highest": "#d1e4ff",
+                        "on-surface-variant": "#44474c",
+                        "tertiary-container": "#1c1c11",
+                        "tertiary": "#000000",
+                        "secondary-container": "#fed488",
+                        "on-primary-container": "#778598",
+                        "surface-variant": "#d1e4ff",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#e6e3d0",
+                        "surface-container": "#e5efff",
+                        "secondary": "#775a19",
+                        "on-tertiary-container": "#868474",
+                        "error-container": "#ffdad6",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#e9f1ff",
+                        "primary-container": "#0f1c2c",
+                        "background": "#f8f9ff",
+                        "on-primary": "#ffffff",
+                        "on-background": "#001d36",
+                        "secondary-fixed-dim": "#e9c176",
+                        "primary": "#000000",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#1c1c11",
+                        "surface-container-low": "#eef4ff",
+                        "secondary-fixed": "#ffdea5",
+                        "surface-bright": "#f8f9ff",
+                        "surface-container-high": "#dbe9ff",
+                        "on-tertiary-fixed-variant": "#48473a"
+                    },
+
+                    borderRadius: {
+                        DEFAULT: "0.125rem",
+                        lg: "0.25rem",
+                        xl: "0.5rem",
+                        full: "0.75rem"
+                    },
+
+                    spacing: {
+                        sm: "16px",
+                        lg: "40px",
+                        xl: "64px",
+                        xs: "8px",
+                        "margin-desktop": "80px",
+                        "margin-mobile": "16px",
+                        base: "4px",
+                        gutter: "24px",
+                        md: "24px"
+                    },
+
+                    fontFamily: {
+                        "headline-lg": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "headline-sm": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "body-lg": ["Work Sans"],
+                        "body-md": ["Work Sans"],
+                        "body-sm": ["Work Sans"],
+                        "label-lg": ["JetBrains Mono"],
+                        "label-md": ["JetBrains Mono"]
+                    },
+
+                    fontSize: {
+                        "headline-lg": [
+                            "40px",
+                            {
+                                lineHeight: "48px",
+                                letterSpacing: "-0.02em",
+                                fontWeight: "700"
+                            }
+                        ],
+
+                        "headline-md": [
+                            "28px",
+                            {
+                                lineHeight: "36px",
+                                fontWeight: "600"
+                            }
+                        ],
+
+                        "headline-sm": [
+                            "20px",
+                            {
+                                lineHeight: "28px",
+                                fontWeight: "600"
+                            }
+                        ],
+
+                        "headline-lg-mobile": [
+                            "32px",
+                            {
+                                lineHeight: "40px",
+                                fontWeight: "700"
+                            }
+                        ],
+
+                        "body-lg": [
+                            "18px",
+                            {
+                                lineHeight: "28px",
+                                fontWeight: "400"
+                            }
+                        ],
+
+                        "body-md": [
+                            "16px",
+                            {
+                                lineHeight: "24px",
+                                fontWeight: "400"
+                            }
+                        ],
+
+                        "body-sm": [
+                            "14px",
+                            {
+                                lineHeight: "20px",
+                                fontWeight: "400"
+                            }
+                        ],
+
+                        "label-lg": [
+                            "14px",
+                            {
+                                lineHeight: "20px",
+                                letterSpacing: "0.05em",
+                                fontWeight: "500"
+                            }
+                        ],
+
+                        "label-md": [
+                            "12px",
+                            {
+                                lineHeight: "16px",
+                                letterSpacing: "0.05em",
+                                fontWeight: "500"
+                            }
+                        ]
+                    }
+                }
+            }
+        };
+    </script>
+
+    <style>
+        html,
+        body {
+            min-height: 100%;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .pulse-slow {
+            animation: pulse-slow 2.8s infinite;
+        }
+
+        @keyframes pulse-slow {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.08);
+                opacity: .8;
+            }
+        }
+    </style>
+
+</head>
+
+<body class="min-h-screen overflow-y-auto bg-background text-on-background flex flex-col items-center justify-center p-margin-mobile md:p-margin-desktop antialiased">
+
+    <!-- Main Card -->
+
+    <main class="w-full max-w-md my-8 bg-surface-container-lowest border border-outline-variant/20 rounded-xl shadow-[0_8px_24px_rgba(13,27,42,0.08)] overflow-hidden">
+                <!-- Details Section -->
+        <div class="p-5 flex flex-col gap-4">
+
+            <!-- Information Card -->
+            <div class="bg-surface p-3 rounded-lg border border-outline-variant/30 flex items-start gap-3">
+
+                <span class="material-symbols-outlined text-error mt-1">
+                    event_busy
+                </span>
+
+                <div>
+                    <h3 class="font-label-lg text-label-lg text-on-surface uppercase tracking-wider mb-1">
+                        Why am I seeing this?
+                    </h3>
+
+                    <p class="font-body-sm text-body-sm text-on-surface-variant">
+                        Your seat booking period has ended. Your access to library
+                        facilities has been temporarily disabled until you renew
+                        your membership.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Renewal Information -->
+            <div class="bg-surface p-3 rounded-lg border border-outline-variant/30 flex items-start gap-3">
+
+                <span class="material-symbols-outlined text-primary mt-1">
+                    info
+                </span>
+
+                <div>
+                    <h3 class="font-label-lg text-label-lg text-on-surface uppercase tracking-wider mb-1">
+                        What can you do?
+                    </h3>
+
+                    <ul class="text-body-sm text-on-surface-variant list-disc pl-5 space-y-1">
+                        <li>Renew your seat booking.</li>
+                        <li>Select a new seat if required.</li>
+                        <li>Choose your preferred duration.</li>
+                        <li>Complete payment to activate access again.</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex flex-col gap-3 mt-2">
+
+                <button
+                    onclick="window.location.href='seat_booking.html'"
+                    class="w-full bg-primary hover:bg-primary-container hover:text-on-primary-container text-on-primary font-label-lg text-label-lg py-3 px-5 rounded-lg transition-all duration-200 flex items-center justify-center gap-2">
+
+                    <span class="material-symbols-outlined">
+                        event_available
+                    </span>
+
+                    Renew Booking
+
+                </button>
+
+                <button
+                    onclick="window.location.href='contact.html'"
+                    class="w-full bg-secondary hover:bg-on-secondary-container text-on-secondary font-label-lg text-label-lg py-3 px-5 rounded-lg transition-all duration-200 flex items-center justify-center gap-2">
+
+                    <span class="material-symbols-outlined">
+                        support_agent
+                    </span>
+
+                    Contact Support
+
+                </button>
+
+                <button
+                    onclick="logoutUser()"
+                    class="w-full border-2 border-primary text-primary hover:border-secondary hover:text-secondary py-3 px-5 rounded-lg transition-all duration-200 flex items-center justify-center gap-2">
+
+                    <span class="material-symbols-outlined">
+                        logout
+                    </span>
+
+                    Log Out
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+
+    <footer class="mt-4 mb-4 text-center text-outline text-label-md">
+        <p>The Titans Library © 2026</p>
+    </footer>
+
+    <script>
+
+        function logoutUser() {
+
+            localStorage.clear();
+            sessionStorage.clear();
+
+            window.location.replace("index.html");
+
+        }
+
+    </script>
+
+</body>
+
+</html>

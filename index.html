@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Login - The Titans Library</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700&amp;family=Work+Sans:wght@400&amp;family=JetBrains+Mono:wght@500&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+    <script>
+        if (localStorage.getItem("isLoggedIn") === "true") {
+            window.location.replace("library_dashboard.html");
+        }
+    </script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#17324d",
+                        "on-tertiary": "#ffffff",
+                        "surface": "#f8f9ff",
+                        "on-secondary-container": "#785a1a",
+                        "on-primary-fixed-variant": "#3a4859",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#0f1c2c",
+                        "surface-tint": "#525f71",
+                        "on-secondary-fixed": "#261900",
+                        "surface-dim": "#c2dcff",
+                        "primary-fixed": "#d6e4f9",
+                        "outline": "#74777d",
+                        "on-secondary-fixed-variant": "#5d4201",
+                        "outline-variant": "#c4c6cc",
+                        "on-surface": "#001d36",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#bac8dc",
+                        "tertiary-fixed-dim": "#c9c7b5",
+                        "inverse-primary": "#bac8dc",
+                        "surface-container-highest": "#d1e4ff",
+                        "on-surface-variant": "#44474c",
+                        "tertiary-container": "#1c1c11",
+                        "tertiary": "#000000",
+                        "secondary-container": "#fed488",
+                        "on-primary-container": "#778598",
+                        "surface-variant": "#d1e4ff",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#e6e3d0",
+                        "surface-container": "#e5efff",
+                        "secondary": "#775a19",
+                        "on-tertiary-container": "#868474",
+                        "error-container": "#ffdad6",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#e9f1ff",
+                        "primary-container": "#0f1c2c",
+                        "background": "#f8f9ff",
+                        "on-primary": "#ffffff",
+                        "on-background": "#001d36",
+                        "secondary-fixed-dim": "#e9c176",
+                        "primary": "#000000",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#1c1c11",
+                        "surface-container-low": "#eef4ff",
+                        "secondary-fixed": "#ffdea5",
+                        "surface-bright": "#f8f9ff",
+                        "surface-container-high": "#dbe9ff",
+                        "on-tertiary-fixed-variant": "#48473a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "sm": "16px",
+                        "lg": "40px",
+                        "xl": "64px",
+                        "xs": "8px",
+                        "margin-desktop": "80px",
+                        "margin-mobile": "16px",
+                        "base": "4px",
+                        "gutter": "24px",
+                        "md": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-md": ["Work Sans"],
+                        "label-lg": ["JetBrains Mono"],
+                        "body-sm": ["Work Sans"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "body-lg": ["Work Sans"],
+                        "label-md": ["JetBrains Mono"],
+                        "headline-sm": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-md": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex items-center justify-center">
+    <div
+        class="w-full max-w-md p-margin-mobile md:p-margin-desktop bg-surface-container-lowest rounded-xl shadow-md md:shadow-lg border border-outline-variant/30 flex flex-col gap-gutter">
+        <!-- Header -->
+        <div class="flex flex-col items-center gap-xs mb-md">
+            <span class="material-symbols-outlined text-primary text-4xl mb-2"
+                style="font-variation-settings: 'FILL' 1;">menu_book</span>
+            <h1 class="text-headline-md font-headline-md text-primary text-center">The Titans Library</h1>
+            <p class="text-body-md font-body-md text-on-surface-variant text-center">Enter your credentials to access
+                your study sanctuary.</p>
+        </div>
+        <!-- Login Form -->
+        <form id="login-form" class="flex flex-col gap-md">
+            <div class="flex flex-col gap-base">
+                <label class="text-label-md font-label-md text-on-surface" for="member-id">Member ID or Email</label>
+                <div class="relative">
+                    <span
+                        class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">person</span>
+                    <input
+                        class="w-full pl-10 pr-4 py-3 bg-surface-container-lowest border border-outline rounded focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors text-body-md font-body-md outline-none placeholder:text-outline-variant"
+                        id="member-id" placeholder="e.g. titan_001" type="text" />
+                </div>
+            </div>
+            <div class="flex flex-col gap-base">
+                <div class="flex justify-between items-center">
+                    <label class="text-label-md font-label-md text-on-surface" for="password">Password</label>
+                    <a class="text-label-md font-label-md text-secondary hover:text-secondary-container transition-colors"
+                        href="#" onclick="openDashboard()">
+                        Forgot Password?
+                    </a>
+                </div>
+                <div class="relative">
+                    <span
+                        class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">lock</span>
+                    <input
+                        class="w-full pl-10 pr-4 py-3 bg-surface-container-lowest border border-outline rounded focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors text-body-md font-body-md outline-none placeholder:text-outline-variant"
+                        id="password" placeholder="••••••••" type="password" />
+                </div>
+            </div>
+            <button
+                class="w-full mt-4 py-3 bg-primary text-on-primary text-label-lg font-label-lg rounded hover:bg-primary-container hover:text-on-primary-container transition-colors duration-200 active:scale-[0.98]"
+                type="submit">
+                Login
+            </button>
+        </form>
+        <!-- Footer -->
+        <div class="mt-sm text-center">
+            <p class="text-body-sm font-body-sm text-on-surface-variant">
+                Don't have an account?
+                <a class="text-label-md font-label-md text-secondary hover:underline ml-1" href="sign_up.html">Sign
+                    Up</a>
+            </p>
+        </div>
+    </div>
+</body>
+<script>
+    function openDashboard() {
+        localStorage.setItem("isLoggedIn", "true");
+        // store current email for profile lookups
+        const memberId = document.getElementById('member-id').value;
+        if (memberId) localStorage.setItem('currentUserEmail', memberId);
+        window.location.replace("library_dashboard.html");
+    }
+    document.getElementById("login-form").addEventListener("submit", async function (event) {
+        event.preventDefault();
+        const memberId = document.getElementById("member-id").value;
+        const password = document.getElementById("password").value;
+
+        try {
+            const response = await fetch(
+                "https://the-titans.onrender.com/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    memberId: memberId,
+                    password: password
+                })
+            }
+            );
+            const data = await response.json();
+            if (data.success) {
+
+                localStorage.setItem("isLoggedIn", "true");
+
+                if (data.role === "admin") {
+
+                    window.location.replace("admin_dashboard.html");
+
+                } else {
+
+                    localStorage.setItem("currentUserEmail", data.user.email);
+                    localStorage.setItem("userEmail", data.user.email);
+                    localStorage.setItem("currentUser", JSON.stringify(data.user));
+
+                    window.location.replace("library_dashboard.html");
+                }
+            } else {
+                alert(data.message);
+            }
+        } catch (error) {
+            console.error("Error during login:", error);
+        }
+    });
+</script>
+
+</html>

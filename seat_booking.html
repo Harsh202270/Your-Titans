@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Seat Booking - The Titans Library</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700&amp;family=JetBrains+Mono:wght@500&amp;family=Work+Sans:wght@400&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script>
+
+        // Sabse pehle ye
+        if (localStorage.getItem("isLoggedIn") !== "true") {
+            window.location.replace("index.html");
+        }
+
+        // Uske baad baaki saara code
+        function logoutUser() {
+            localStorage.removeItem("isLoggedIn");
+            sessionStorage.clear();
+            window.location.replace("index.html");
+        }
+
+        // Baaki JavaScript...
+
+    </script>
+
+    <script>
+        const API_URL = "https://the-titans.onrender.com";
+
+        let bookingData = {
+            seat: "",
+            shift: "",
+            duration: "",
+            locker: false,
+            amount: 0
+        };
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const confirmBtn = document.getElementById('confirm-booking-btn');
+            const bookingModal = document.getElementById('bookingModal');
+            const modalClose = document.getElementById('modal-close');
+            const bookNow = document.getElementById('book-now');
+
+            const modalDesk = document.getElementById('modal-desk');
+            const modalShift = document.getElementById('modal-shift');
+            const modalDuration = document.getElementById('modal-duration');
+            const modalLocker = document.getElementById('modal-locker');
+            const modalPrice = document.getElementById('modal-price');
+            const modalNotes = document.getElementById('modal-notes');
+
+            // Locker Toggle
+            const lockerToggle = document.getElementById('locker-toggle');
+            const lockerSection = document.getElementById("locker-section");
+
+            let basePrice = 0;
+            let selectedSeatId = "";
+
+            // Shift Details
+            const shiftMap = {
+                '4hours': {
+                    duration: '04 Hours',
+                    timing: '07:00 AM - 11:00 AM',
+                    price: 350
+                },
+                '7hours': {
+                    duration: '07 Hours',
+                    timing: '03:00 PM - 10:00 PM',
+                    price: 450
+                },
+                '8hours_morning': {
+                    duration: '08 Hours',
+                    timing: '07:00 AM - 03:00 PM',
+                    price: 650
+                },
+                '8hours_evening': {
+                    duration: '08 Hours',
+                    timing: '11:00 AM - 07:00 PM',
+                    price: 700
+                },
+                '11hours': {
+                    duration: '11 Hours',
+                    timing: '11:00 AM - 10:00 PM',
+                    price: 800
+                },
+                '12hours': {
+                    duration: '12 Hours',
+                    timing: '07:00 AM - 07:00 PM',
+                    price: 900
+                },
+                '15hours': {
+                    duration: '15 Hours',
+                    timing: '07:00 AM - 10:00 PM',
+                    price: 950
+                }
+            };
+
+            function getSelectedDeskLabel() {
+                const label = document.getElementById('selected-desk-label');
+                return label ? label.textContent : '-';
+            }
+
+            function updatePrice() {
+
+                const months = parseInt(document.getElementById("month-select").value);
+
+                const shiftKey = document.getElementById("shift-select").value;
+
+                if (!shiftKey) return;
+
+                // Recalculate base price every time
+                basePrice = shiftMap[shiftKey].price * months;
+
+                let total = basePrice;
+
+                if (!lockerSection.classList.contains("hidden") && lockerToggle.checked) {
+
+                    const lockerPrice = 100 * months;
+
+                    total += lockerPrice;
+
+                    modalLocker.textContent = `Confirmed (+₹${lockerPrice})`;
+
+                    modalNotes.textContent = "Locker has been added to your booking.";
+
+                } else {
+
+                    modalLocker.textContent = "Not Selected";
+
+                    modalNotes.textContent = "Locker not included.";
+
+                }
+
+                // Update duration text
+                modalDuration.textContent =
+                    `${shiftMap[shiftKey].duration} × ${months} Month${months > 1 ? "s" : ""}`;
+
+                modalPrice.textContent = `₹${total}/-`;
+
+                bookingData.months = months;
+                bookingData.amount = total;
+                bookingData.locker = lockerToggle.checked;
+
+            }
+
+            function openBookingPreview() {
+
+                const shiftSelect = document.getElementById('shift-select');
+                const shiftKey = shiftSelect.value;
+
+                if (!shiftKey) {
+                    alert("Please select a time slot.");
+                    return;
+                }
+
+                const shift = shiftMap[shiftKey];
+                // Hide locker for 4 Hours and 7 Hours
+                if (shiftKey === "4hours" || shiftKey === "7hours") {
+
+                    lockerSection.classList.add("hidden");
+                    lockerToggle.checked = false;
+
+                } else {
+
+                    lockerSection.classList.remove("hidden");
+
+                }
+
+                modalDesk.textContent = getSelectedDeskLabel();
+                selectedSeatId = document.getElementById("selected-desk-label").dataset.id;
+                modalShift.textContent = shift.timing;
+                modalDuration.textContent = shift.duration;
+
+                bookingData.seat = getSelectedDeskLabel();
+                bookingData.shift = shift.timing;
+                bookingData.duration = shift.duration;
+                const months = parseInt(document.getElementById("month-select").value);
+
+                bookingData.months = months;
+                bookingData.amount = shift.price * months;
+                bookingData.locker = false;
+
+                basePrice = shift.price * months;
+
+                // Reset Locker Every Time
+                lockerToggle.checked = false;
+
+                updatePrice();
+
+                bookingModal.classList.remove('hidden');
+                bookingModal.classList.add('flex');
+            }
+
+            function closeBookingPreview() {
+                bookingModal.classList.remove('flex');
+                bookingModal.classList.add('hidden');
+            }
+
+            // Toggle Locker
+            lockerToggle.addEventListener('change', updatePrice);
+
+            document.getElementById("month-select").addEventListener("change", updatePrice);
+
+            document.getElementById("month-select").addEventListener("change", function () {
+
+                const months = parseInt(this.value);
+
+                const shiftKey = document.getElementById("shift-select").value;
+
+                if (!shiftKey) return;
+
+                basePrice = shiftMap[shiftKey].price * months;
+
+                bookingData.months = months;
+
+                updatePrice();
+
+            });
+
+            // Open Modal
+            confirmBtn.addEventListener('click', openBookingPreview);
+
+            // Close Modal
+            modalClose.addEventListener('click', closeBookingPreview);
+
+            bookingModal.addEventListener('click', function (e) {
+                if (e.target === bookingModal) {
+                    closeBookingPreview();
+                }
+            });
+
+            // Booking Button
+            bookNow.addEventListener("click", async function () {
+
+                const months = parseInt(document.getElementById("month-select").value);
+
+                const lockerPrice = lockerToggle.checked ? (100 * months) : 0;
+
+                const amount = basePrice + lockerPrice;
+
+                try {
+
+                    // Create Razorpay Order
+                    const orderResponse = await fetch(`${API_URL}/create-order`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            amount: amount
+                        })
+                    });
+
+                    const order = await orderResponse.json();
+
+                    if (!order.success) {
+                        alert("Unable to create payment.");
+                        return;
+                    }
+
+                    const options = {
+
+                        key: order.key,
+
+                        amount: order.amount,
+
+                        currency: order.currency,
+
+                        name: "The Titans Library",
+
+                        description: "Seat Booking",
+
+                        order_id: order.order_id,
+
+                        handler: async function (response) {
+
+                            // Verify payment first
+                            const verifyRes = await fetch(`${API_URL}/verify-payment`, {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify({
+                                    razorpay_order_id: response.razorpay_order_id,
+                                    razorpay_payment_id: response.razorpay_payment_id,
+                                    razorpay_signature: response.razorpay_signature
+                                })
+                            });
+
+                            const verifyData = await verifyRes.json();
+
+                            if (!verifyData.success) {
+                                alert("Payment verification failed.");
+                                return;
+                            }
+                            const months = parseInt(document.getElementById("month-select").value);
+                            // Payment verified
+                            const bookingResponse = await fetch(`${API_URL}/book-seat`, {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify({
+                                    seat: selectedSeatId,
+                                    shift: document.getElementById("shift-select").value,
+                                    months: months,
+                                    locker: lockerToggle.checked,
+                                    amount: amount,
+                                    startDate: document.getElementById("start-date").value,
+                                    email: localStorage.getItem("currentUserEmail"),
+                                    payment_id: response.razorpay_payment_id,
+                                    order_id: response.razorpay_order_id
+                                })
+                            });
+
+                            const result = await bookingResponse.json();
+
+                            if (bookingResponse.ok) {
+
+                                alert("Payment Successful & Seat Booked!");
+
+                                window.location.href = "booking_confirmed.html";
+
+                            } else {
+
+                                alert(result.message);
+
+                            }
+                        }
+
+                    };
+
+                    const rzp = new Razorpay(options);
+
+                    rzp.open();
+
+                } catch (err) {
+
+                    console.error(err);
+
+                    alert("Payment Failed.");
+
+                }
+
+            });
+
+        });
+    </script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#17324d",
+                        "surface-container-high": "#dbe9ff",
+                        "error": "#ba1a1a",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#d1e4ff",
+                        "outline-variant": "#c4c6cc",
+                        "inverse-on-surface": "#e9f1ff",
+                        "surface-bright": "#f8f9ff",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#261900",
+                        "surface-container-highest": "#d1e4ff",
+                        "secondary-container": "#fed488",
+                        "secondary-fixed": "#ffdea5",
+                        "on-error-container": "#93000a",
+                        "on-background": "#001d36",
+                        "on-primary-fixed-variant": "#3a4859",
+                        "on-secondary-container": "#785a1a",
+                        "primary-fixed-dim": "#bac8dc",
+                        "inverse-primary": "#bac8dc",
+                        "surface-tint": "#525f71",
+                        "on-surface": "#001d36",
+                        "outline": "#74777d",
+                        "on-surface-variant": "#44474c",
+                        "primary-container": "#0f1c2c",
+                        "error-container": "#ffdad6",
+                        "secondary": "#775a19",
+                        "on-primary": "#ffffff",
+                        "on-primary-container": "#778598",
+                        "on-tertiary-fixed-variant": "#48473a",
+                        "primary": "#000000",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#f8f9ff",
+                        "surface-container-low": "#eef4ff",
+                        "tertiary-fixed": "#e6e3d0",
+                        "surface-container": "#e5efff",
+                        "primary-fixed": "#d6e4f9",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#000000",
+                        "on-primary-fixed": "#0f1c2c",
+                        "on-tertiary-container": "#868474",
+                        "secondary-fixed-dim": "#e9c176",
+                        "tertiary-container": "#1c1c11",
+                        "on-secondary-fixed-variant": "#5d4201",
+                        "on-tertiary-fixed": "#1c1c11",
+                        "background": "#f8f9ff",
+                        "tertiary-fixed-dim": "#c9c7b5",
+                        "surface-dim": "#c2dcff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "lg": "40px",
+                        "xl": "64px",
+                        "xs": "8px",
+                        "margin-mobile": "16px",
+                        "md": "24px",
+                        "sm": "16px",
+                        "gutter": "24px",
+                        "margin-desktop": "80px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "headline-sm": ["Hanken Grotesk"],
+                        "body-sm": ["Work Sans"],
+                        "label-lg": ["JetBrains Mono"],
+                        "body-md": ["Work Sans"],
+                        "label-md": ["JetBrains Mono"],
+                        "body-lg": ["Work Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .tooltip {
+            position: absolute;
+            background: #111827;
+            color: white;
+            padding: 12px 16px;
+            border-radius: 12px;
+            min-width: 220px;
+            font-size: 14px;
+            line-height: 1.8;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, .25);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-8px);
+            transition: .2s;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .tooltip.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .tooltip strong {
+            color: white;
+        }
+
+        .seat-btn.available {
+            background-color: #ffffff;
+            border: 1px solid rgba(65, 90, 119, 0.2);
+        }
+
+        .seat-btn.available:hover {
+            border-color: #C5A059;
+            border-width: 2px;
+            cursor: pointer;
+        }
+
+        .seat-btn.occupied {
+            background-color: #0f1c2c;
+            /* primary-container approx navy */
+            color: #ffffff;
+            cursor: not-allowed;
+            border: 1px solid #0f1c2c;
+        }
+
+        .seat-btn.selected {
+            background-color: #fed488;
+            /* secondary-container approx gold */
+            border: 2px solid #C5A059;
+            color: #001d36;
+            animation: pulse-border 1.5s infinite;
+        }
+
+        @keyframes pulse-border {
+            0% {
+                box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 4px rgba(197, 160, 89, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(197, 160, 89, 0);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-surface text-on-surface min-h-screen flex flex-col font-body-md">
+    <!-- TopAppBar -->
+    <header
+        class="fixed top-0 w-full z-50 bg-surface dark:bg-surface-container-high h-16 flex justify-between items-center px-margin-mobile md:px-margin-desktop">
+        <div
+            class="flex items-center gap-xs text-primary font-bold active:scale-95 transition-transform hover:bg-secondary-container transition-colors duration-200 p-2 rounded-lg cursor-pointer">
+            <span class="material-symbols-outlined" data-icon="menu_book"
+                style="font-variation-settings: 'FILL' 1;">menu_book</span>
+        </div>
+        <h1 class="text-headline-sm font-headline-sm font-bold text-primary dark:text-inverse-primary truncate">The
+            Titans Library</h1>
+        <button type="button" onclick="window.location.href='scan_to_enter.html'"
+            class="bg-surface-container-high text-on-surface font-label-lg text-label-lg px-4 py-2 rounded-full hover:bg-secondary-container transition-colors duration-200 active:scale-95 flex items-center gap-2">
+            <span>Scan to Enter</span>
+        </button>
+    </header>
+    <!-- Main Content Canvas -->
+    <main class="flex-1 mt-16 mb-20 md:mb-0 px-margin-mobile md:px-margin-desktop py-md max-w-7xl mx-auto w-full">
+        <div class="mb-lg">
+            <h2
+                class="text-headline-lg-mobile md:text-headline-lg font-headline-lg-mobile md:font-headline-lg text-primary mb-xs">
+                Seat Booking</h2>
+            <p class="text-body-md font-body-md text-on-surface-variant max-w-2xl">Select an available desk for your
+                focused study session. Premium members enjoy priority booking up to 48 hours in advance.</p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+            <!-- Left Panel: Legend & Booking Summary (Sticky on Desktop) -->
+            <aside class="lg:col-span-4 flex flex-col gap-md lg:sticky lg:top-24">
+                <!-- Status Legend Card -->
+                <div class="bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-md shadow-sm">
+                    <h3 class="text-label-lg font-label-lg text-primary mb-sm">Desk Status</h3>
+                    <div class="flex flex-col gap-xs">
+                        <div class="flex items-center gap-xs">
+                            <div class="w-6 h-6 bg-surface-container-lowest border border-outline-variant/20 rounded">
+                            </div>
+                            <span class="text-body-sm font-body-sm text-on-surface-variant">Available</span>
+                        </div>
+                        <div class="flex items-center gap-xs">
+                            <div class="w-6 h-6 bg-primary-container rounded"></div>
+                            <span class="text-body-sm font-body-sm text-on-surface-variant">Occupied</span>
+                        </div>
+                        <div class="flex items-center gap-xs">
+                            <div class="w-6 h-6 bg-secondary-container border-2 border-secondary rounded"></div>
+                            <span class="text-body-sm font-body-sm text-on-surface-variant">Your Selection</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reading Room Atmosphere Image -->
+                <div class="rounded-xl overflow-hidden h-48 border border-outline-variant/20">
+                    <img class="w-full h-full object-cover" data-alt="A serene, minimalist library reading room..."
+                        src="https://i.ibb.co/XZmXV645/upload.jpg" />
+                </div>
+            </aside>
+            <!-- Right Panel: The Grid -->
+            <div class="lg:col-span-8">
+                <div
+                    class="bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-md shadow-sm overflow-x-auto">
+                    <div class="min-w-[600px]">
+                        <!-- Ensure minimum width to maintain grid structure on small screens if scrolled -->
+                        <!-- Zone Headers -->
+                        <div
+                            class="flex justify-between mb-4 text-label-md font-label-md text-on-surface-variant uppercase border-b border-outline-variant/20 pb-2">
+                            <span>Quiet Zone A</span>
+                            <span>Quiet Zone B</span>
+                        </div>
+                        <!-- 8x7 Grid representing 56 seats -->
+                        <div class="grid grid-cols-8 gap-xs" id="seat-grid">
+                            <!-- Seats will be generated here via JS -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Booking Controls (Visible when seat selected) -->
+            <div class="bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-md shadow-sm hidden"
+                id="booking-panel">
+                <h3
+                    class="text-headline-sm font-headline-sm text-primary mb-sm border-b border-outline-variant/20 pb-2">
+                    Session Details</h3>
+                <div class="mb-sm">
+                    <span class="text-label-md font-label-md text-on-surface-variant uppercase block mb-1">Selected
+                        Desk</span>
+                    <div class="text-headline-md font-headline-md text-primary" id="selected-desk-label">--</div>
+                </div>
+                <div class="mb-sm">
+                    <label class="text-label-md font-label-md text-on-surface-variant uppercase block mb-1"
+                        for="shift-select">Shift Timing</label>
+                    <select
+                        class="w-full bg-surface-bright border border-outline-variant rounded-lg p-2 text-body-md font-body-md focus:border-secondary focus:ring-1 focus:ring-secondary outline-none"
+                        id="shift-select">
+                        <option value="" selected disabled>Select Time Slot</option>
+                        <option value="4hours">4 Hours (07:00 AM - 11:00 AM)</option>
+                        <option value="7hours">7 Hours (03:00 PM - 10:00 PM)</option>
+                        <option value="8hours_morning">8 Hours (07:00 AM - 03:00 PM)</option>
+                        <option value="8hours_evening">8 Hours (11:00 AM - 07:00 PM)</option>
+                        <option value="11hours">11 Hours (11:00 AM - 10:00 PM)</option>
+                        <option value="12hours">12 Hours (07:00 AM - 07:00 PM)</option>
+                        <option value="15hours">15 Hours (07:00 AM - 10:00 PM)</option>
+                    </select>
+                </div>
+                <button id="confirm-booking-btn"
+                    class="w-full bg-secondary-container text-on-secondary-container font-label-lg text-label-lg py-3 rounded-lg hover:bg-secondary transition-colors duration-200 mt-4 font-bold border border-secondary shadow-sm">
+                    Confirm Booking
+                </button>
+                <button
+                    class="w-full mt-2 bg-transparent border border-primary-container text-primary-container font-label-lg text-label-lg py-2 rounded-lg hover:bg-surface-variant transition-colors duration-200"
+                    id="cancel-selection">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </main>
+    <!-- BottomNavBar (Mobile Only) -->
+    <nav
+        class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center h-20 px-4 bg-surface dark:bg-inverse-surface shadow-[0_-2px_10px_rgba(0,0,0,0.05)] z-50">
+        <a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-secondary active:scale-90 transition-transform"
+            href="library_dashboard.html">
+            <span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+            <span class="text-label-md font-label-md">Home</span>
+        </a>
+        <a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 active:scale-90 transition-transform"
+            href="seat_booking.html">
+            <span class="material-symbols-outlined mb-1" data-icon="event_seat"
+                style="font-variation-settings: 'FILL' 1;">event_seat</span>
+            <span class="text-label-md font-label-md">Seat Booking</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-secondary active:scale-90 transition-transform"
+            href="my_profile.html">
+            <span class="material-symbols-outlined mb-1" data-icon="person">person</span>
+            <span class="text-label-md font-label-md">Profile</span>
+        </a>
+    </nav>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const gridContainer = document.getElementById('seat-grid');
+            const bookingPanel = document.getElementById('booking-panel');
+            const selectedDeskLabel = document.getElementById('selected-desk-label');
+            const cancelBtn = document.getElementById('cancel-selection');
+
+            let currentlySelected = null;
+
+
+
+            loadSeats();
+
+            async function loadSeats() {
+
+                gridContainer.innerHTML = "";
+
+                try {
+
+                    const response = await fetch(`${API_URL}/seats`);
+                    const seats = await response.json();
+
+                    seats.forEach(seatData => {
+
+                        const seat = document.createElement("button");
+
+                        seat.className =
+                            "seat-btn w-full aspect-square rounded-md flex items-center justify-center text-label-md font-label-md transition-all duration-200";
+
+                        seat.textContent = seatData.number;
+                        seat.dataset.id = seatData.id;
+
+                        if (seatData.status === "occupied") {
+
+                            seat.classList.add("occupied");
+                            seat.disabled = true;
+                            seat.title = `${seatData.number} - Occupied`;
+
+                        } else {
+
+                            seat.classList.add("available");
+                            seat.title = `${seatData.number} - Available`;
+
+                            seat.addEventListener("click", () => {
+
+                                if (currentlySelected) {
+                                    currentlySelected.classList.remove("selected");
+                                }
+
+                                seat.classList.add("selected");
+                                currentlySelected = seat;
+
+                                selectedDeskLabel.textContent = seatData.number;
+                                selectedDeskLabel.dataset.id = seatData.id;
+
+                                bookingPanel.classList.remove("hidden");
+                                bookingPanel.classList.add("block");
+
+                            });
+
+                        }
+
+                        gridContainer.appendChild(seat);
+
+                    });
+
+                } catch (err) {
+                    console.error(err);
+                    alert("Unable to load seats.");
+                }
+
+            }
+
+            cancelBtn.addEventListener('click', () => {
+                if (currentlySelected) {
+                    currentlySelected.classList.remove('selected');
+                    currentlySelected = null;
+                }
+
+                bookingPanel.classList.remove('block');
+                bookingPanel.classList.add('hidden');
+            });
+        });
+
+        const tooltip = document.getElementById("seat-tooltip");
+
+        seat.addEventListener("mousemove", (e) => {
+
+            tooltip.innerHTML = `
+                <strong>Seat : ${seatData.number}</strong><br>
+                <strong>Status :</strong> ${seatData.status.toUpperCase()}<br>
+                <strong>Morning :</strong> ${seatData.morning}<br>
+                <strong>Evening :</strong> ${seatData.evening}<br>
+                <strong>Full Day :</strong> ${seatData.full_day}<br>
+                ${seatData.status === "occupied"
+                    ? `<strong>Occupied Time :</strong><br>
+                    ${seatData.occupied_from} - ${seatData.occupied_to}`
+                    : `<strong>Currently Free</strong>`
+                }
+            `;
+
+            tooltip.style.left = (e.pageX + 20) + "px";
+            tooltip.style.top = (e.pageY - 20) + "px";
+
+            tooltip.classList.add("show");
+
+        });
+
+        seat.addEventListener("mouseleave", () => {
+
+            tooltip.classList.remove("show");
+
+        });
+    </script>
+    <!-- Booking Details Modal -->
+    <div id="bookingModal" class="fixed inset-0 hidden items-center justify-center bg-black/50" style="z-index:9999;">
+
+        <div class="bg-surface w-[95%] max-w-2xl rounded-2xl shadow-2xl overflow-hidden">
+
+            <!-- Header -->
+            <div class="p-4 border-b border-outline-variant/20 flex justify-between items-start">
+                <div>
+                    <h3 id="modal-title" class="text-headline-sm font-bold text-primary">
+                        Booking Preview
+                    </h3>
+                    <p id="modal-subtitle" class="text-sm text-on-surface-variant">
+                        Review your booking details before confirming.
+                    </p>
+                </div>
+
+                <button id="modal-close" class="text-on-surface-variant hover:text-primary text-lg">
+                    ✕
+                </button>
+            </div>
+
+            <!-- Body -->
+            <div class="p-4 max-h-[70vh] overflow-y-auto space-y-5 pb-28 md:pb-0">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                    <!-- Left -->
+                    <div>
+
+                        <label class="text-sm text-on-surface-variant">Selected Desk</label>
+                        <div id="modal-desk" class="text-xl font-bold text-primary mb-3">-</div>
+
+                        <label class="text-sm text-on-surface-variant">Shift</label>
+                        <div id="modal-shift" class="mb-3">-</div>
+
+                        <div class="mb-sm">
+                            <label class="text-label-md font-label-md text-on-surface-variant uppercase block mb-1">
+                                Starting Date
+                            </label>
+
+                            <input type="date" id="start-date"
+                                class="w-full bg-surface-bright border border-outline-variant rounded-lg p-2">
+                        </div>
+
+                        <div class="mb-sm">
+                            <label class="text-label-md font-label-md text-on-surface-variant uppercase block mb-1">
+                                Membership Duration
+                            </label>
+
+                            <select id="month-select"
+                                class="w-full bg-surface-bright border border-outline-variant rounded-lg p-2">
+
+                                <option value="1">1 Month</option>
+                                <option value="2">2 Months</option>
+                                <option value="3">3 Months</option>
+                                <option value="6">6 Months</option>
+                                <option value="12">12 Months</option>
+
+                            </select>
+                        </div>
+
+                        <label class="text-sm text-on-surface-variant">Duration</label>
+                        <div id="modal-duration" class="mb-3">-</div>
+
+                        <!-- Locker Toggle -->
+                        <label class="text-sm text-on-surface-variant block mb-2">
+                            Locker (Optional)
+                        </label>
+
+                        <div id="locker-section" class="flex items-center justify-between border rounded-lg p-3">
+
+                            <div>
+                                <div id="modal-locker" class="font-semibold">
+                                    Not Selected
+                                </div>
+
+                                <div id="locker-price-label" class="text-xs text-gray-500">
+                                    Add Locker (+₹100 / Month)
+                                </div>
+                            </div>
+
+                            <label class="relative inline-flex items-center cursor-pointer">
+
+                                <input type="checkbox" id="locker-toggle" class="sr-only peer">
+
+                                <div class="w-11 h-6 bg-gray-300 rounded-full
+                                peer-checked:bg-green-500
+                                after:content-['']
+                                after:absolute
+                                after:top-0.5
+                                after:left-[2px]
+                                after:bg-white
+                                after:border
+                                after:rounded-full
+                                after:h-5
+                                after:w-5
+                                after:transition-all
+                                peer-checked:after:translate-x-5">
+                                </div>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Right -->
+                    <div>
+
+                        <label class="text-sm text-on-surface-variant">
+                            Total Price
+                        </label>
+
+                        <div id="modal-price" class="text-2xl font-bold text-primary mb-4">
+                            ₹0/-
+                        </div>
+
+                        <label class="text-sm text-on-surface-variant">
+                            Notes
+                        </label>
+
+                        <div id="modal-notes" class="text-sm text-gray-600">
+                            Locker is optional. Turn on the switch if you need one.
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Fee Structure -->
+                <div>
+
+                    <label class="text-sm text-on-surface-variant">
+                        Fee Structure
+                    </label>
+
+                    <div class="mt-2 border rounded-lg overflow-hidden">
+
+                        <!-- Replace fee_structure.jpg with your image -->
+                        <img src="https://i.ibb.co/XZmXV645/upload.jpg" alt="Fee Structure"
+                            class="w-full object-contain">
+
+                    </div>
+
+                </div>
+
+                <!-- Button -->
+                <button id="book-now"
+                    class="w-full bg-secondary-container text-on-secondary-container py-3 rounded-lg font-bold hover:opacity-90 transition">
+                    Wow — Make This Booking
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <div id="seat-tooltip" class="tooltip"></div>
+</body>
+
+</html>

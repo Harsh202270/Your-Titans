@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>The Titans Library - Library Map</title>
+        <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700&amp;family=JetBrains+Mono:wght@500&amp;family=Work+Sans:wght@400&amp;display=swap"
+                rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+                rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+                rel="stylesheet" />
+        <script>
+
+                // Sabse pehle ye
+                if (localStorage.getItem("isLoggedIn") !== "true") {
+                        window.location.replace("index.html");
+                }
+
+                function logoutUser() {
+
+                        document.getElementById("logoutModal").classList.remove("hidden");
+
+                }
+
+
+                function closeLogoutModal() {
+
+                        document.getElementById("logoutModal").classList.add("hidden");
+
+                }
+
+
+                function confirmLogout() {
+
+                        localStorage.removeItem("isLoggedIn");
+                        sessionStorage.clear();
+
+                        window.location.replace("index.html");
+
+                }
+
+        </script>
+        <script id="tailwind-config">
+                tailwind.config = {
+                        darkMode: "class",
+                        theme: {
+                                extend: {
+                                        "colors": {
+                                                "inverse-surface": "#17324d",
+                                                "on-error-container": "#93000a",
+                                                "inverse-on-surface": "#e9f1ff",
+                                                "on-tertiary-container": "#868474",
+                                                "on-primary-fixed": "#0f1c2c",
+                                                "surface-container": "#e5efff",
+                                                "outline": "#74777d",
+                                                "tertiary-fixed": "#e6e3d0",
+                                                "surface-tint": "#525f71",
+                                                "on-surface": "#001d36",
+                                                "on-primary-container": "#778598",
+                                                "on-primary-fixed-variant": "#3a4859",
+                                                "secondary-container": "#fed488",
+                                                "on-primary": "#ffffff",
+                                                "inverse-primary": "#bac8dc",
+                                                "on-tertiary": "#ffffff",
+                                                "primary-container": "#0f1c2c",
+                                                "surface": "#f8f9ff",
+                                                "secondary": "#775a19",
+                                                "on-surface-variant": "#44474c",
+                                                "on-secondary-fixed": "#261900",
+                                                "tertiary-container": "#1c1c11",
+                                                "surface-container-highest": "#d1e4ff",
+                                                "secondary-fixed": "#ffdea5",
+                                                "surface-variant": "#d1e4ff",
+                                                "surface-dim": "#c2dcff",
+                                                "on-secondary": "#ffffff",
+                                                "outline-variant": "#c4c6cc",
+                                                "on-tertiary-fixed": "#1c1c11",
+                                                "tertiary": "#000000",
+                                                "on-tertiary-fixed-variant": "#48473a",
+                                                "on-error": "#ffffff",
+                                                "primary-fixed-dim": "#bac8dc",
+                                                "error": "#ba1a1a",
+                                                "secondary-fixed-dim": "#e9c176",
+                                                "primary": "#000000",
+                                                "error-container": "#ffdad6",
+                                                "surface-container-low": "#eef4ff",
+                                                "surface-container-high": "#dbe9ff",
+                                                "surface-bright": "#f8f9ff",
+                                                "tertiary-fixed-dim": "#c9c7b5",
+                                                "on-secondary-container": "#785a1a",
+                                                "on-background": "#001d36",
+                                                "primary-fixed": "#d6e4f9",
+                                                "background": "#f8f9ff",
+                                                "on-secondary-fixed-variant": "#5d4201",
+                                                "surface-container-lowest": "#ffffff"
+                                        },
+                                        "borderRadius": {
+                                                "DEFAULT": "0.125rem",
+                                                "lg": "0.25rem",
+                                                "xl": "0.5rem",
+                                                "full": "0.75rem"
+                                        },
+                                        "spacing": {
+                                                "sm": "16px",
+                                                "margin-desktop": "80px",
+                                                "gutter": "24px",
+                                                "base": "4px",
+                                                "md": "24px",
+                                                "margin-mobile": "16px",
+                                                "lg": "40px",
+                                                "xs": "8px",
+                                                "xl": "64px"
+                                        },
+                                        "fontFamily": {
+                                                "headline-md": [
+                                                        "Hanken Grotesk"
+                                                ],
+                                                "headline-lg-mobile": [
+                                                        "Hanken Grotesk"
+                                                ],
+                                                "headline-lg": [
+                                                        "Hanken Grotesk"
+                                                ],
+                                                "body-sm": [
+                                                        "Work Sans"
+                                                ],
+                                                "body-lg": [
+                                                        "Work Sans"
+                                                ],
+                                                "label-lg": [
+                                                        "JetBrains Mono"
+                                                ],
+                                                "label-md": [
+                                                        "JetBrains Mono"
+                                                ],
+                                                "headline-sm": [
+                                                        "Hanken Grotesk"
+                                                ],
+                                                "body-md": [
+                                                        "Work Sans"
+                                                ]
+                                        },
+                                        "fontSize": {
+                                                "headline-md": [
+                                                        "28px",
+                                                        {
+                                                                "lineHeight": "36px",
+                                                                "fontWeight": "600"
+                                                        }
+                                                ],
+                                                "headline-lg-mobile": [
+                                                        "32px",
+                                                        {
+                                                                "lineHeight": "40px",
+                                                                "fontWeight": "700"
+                                                        }
+                                                ],
+                                                "headline-lg": [
+                                                        "40px",
+                                                        {
+                                                                "lineHeight": "48px",
+                                                                "letterSpacing": "-0.02em",
+                                                                "fontWeight": "700"
+                                                        }
+                                                ],
+                                                "body-sm": [
+                                                        "14px",
+                                                        {
+                                                                "lineHeight": "20px",
+                                                                "fontWeight": "400"
+                                                        }
+                                                ],
+                                                "body-lg": [
+                                                        "18px",
+                                                        {
+                                                                "lineHeight": "28px",
+                                                                "fontWeight": "400"
+                                                        }
+                                                ],
+                                                "label-lg": [
+                                                        "14px",
+                                                        {
+                                                                "lineHeight": "20px",
+                                                                "letterSpacing": "0.05em",
+                                                                "fontWeight": "500"
+                                                        }
+                                                ],
+                                                "label-md": [
+                                                        "12px",
+                                                        {
+                                                                "lineHeight": "16px",
+                                                                "letterSpacing": "0.05em",
+                                                                "fontWeight": "500"
+                                                        }
+                                                ],
+                                                "headline-sm": [
+                                                        "20px",
+                                                        {
+                                                                "lineHeight": "28px",
+                                                                "fontWeight": "600"
+                                                        }
+                                                ],
+                                                "body-md": [
+                                                        "16px",
+                                                        {
+                                                                "lineHeight": "24px",
+                                                                "fontWeight": "400"
+                                                        }
+                                                ]
+                                        }
+                                },
+                        }
+                }
+        </script>
+        <style>
+                body {
+                        background-color: #F4F1DE;
+                        /* Level 0 Surface */
+                }
+
+                /* Fixed Grid Overlay for visual rhythm - development only, disabled for prod */
+                /* .grid-overlay { background-image: repeating-linear-gradient(to right, transparent, transparent calc(100%/12 - 24px), rgba(255, 0, 0, 0.1) calc(100%/12 - 24px), rgba(255, 0, 0, 0.1) calc(100%/12)); } */
+        </style>
+</head>
+
+<body class="font-body-md text-on-surface antialiased min-h-screen flex flex-col pt-16 md:flex-row md:pt-0">
+        <!-- Top App Bar (Mobile) -->
+        <header
+                class="fixed top-0 w-full z-50 bg-surface dark:bg-surface-container-high flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 w-full">
+                <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary font-bold">menu_book</span>
+                        <span
+                                class="text-headline-sm font-headline-sm font-bold text-primary dark:text-inverse-primary">The
+                                Titans
+                                Library</span>
+                </div>
+                <button type="button" onclick="window.location.href='scan_to_enter.html'"
+                        class="flex items-center gap-1 bg-secondary-container text-on-secondary-container px-3 py-1.5 rounded-full hover:bg-secondary-container transition-colors duration-200 active:scale-95 transition-transform">
+                        <span class="text-label-lg font-label-lg">Scan to Enter</span>
+                </button>
+        </header>
+        <!-- Main Content Canvas -->
+        <main
+                class="flex-1 md:ml-72 pb-24 md:pb-0 p-margin-mobile md:p-margin-desktop bg-surface w-full overflow-y-auto">
+                <div class="max-w-6xl mx-auto space-y-md">
+                        <!-- Header Section -->
+                        <div
+                                class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 border-b border-outline-variant pb-md">
+                                <div>
+                                        <h2
+                                                class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary tracking-tight">
+                                                Facility Map</h2>
+                                        <p class="font-body-lg text-body-lg text-on-surface-variant mt-2 max-w-2xl">
+                                                Locate your reserved seat, collaborative spaces, and essential
+                                                amenities.</p>
+                                </div>
+                                <div class="flex gap-2">
+                                        <button
+                                                class="flex items-center gap-2 px-4 py-2 border border-outline text-on-surface rounded font-label-lg text-label-lg hover:border-secondary transition-colors group">
+                                                <span
+                                                        class="material-symbols-outlined text-outline group-hover:text-secondary">print</span>
+                                                Print Map
+                                        </button>
+                                </div>
+                        </div>
+                        <!-- Bento Grid Layout for Map and Info -->
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+                                <!-- Main Map Area (Spans 8 columns on large screens) -->
+                                <div
+                                        class="lg:col-span-8 bg-on-primary rounded border border-outline/20 p-md relative overflow-hidden group">
+                                        <div class="flex justify-between items-center mb-6">
+                                                <h3 class="font-headline-sm text-headline-sm text-primary">Ground Floor
+                                                        Level 1</h3>
+                                                <div
+                                                        class="flex items-center gap-2 text-on-surface-variant font-label-md text-label-md">
+                                                        <span class="material-symbols-outlined text-[16px]">info</span>
+                                                        Interactive Map
+                                                </div>
+                                        </div>
+                                        <!-- Simulated Map Container -->
+                                        <div
+                                                class="relative w-full aspect-[4/3] bg-surface-container-low rounded border border-outline-variant/50 flex items-center justify-center p-4">
+                                                <!-- Map Legend Overlay -->
+                                                <div
+                                                        class="absolute bottom-4 left-4 bg-on-primary p-3 rounded shadow-sm border border-outline/10 z-10 hidden sm:block">
+                                                        <h4
+                                                                class="font-label-md text-label-md text-primary mb-2 border-b border-outline/10 pb-1">
+                                                                Legend</h4>
+                                                        <ul class="space-y-1">
+                                                                <li class="flex items-center gap-2">
+                                                                        <div class="w-3 h-3 rounded-full bg-secondary">
+                                                                        </div><span
+                                                                                class="font-label-md text-label-md text-on-surface-variant">Quiet
+                                                                                Zone</span>
+                                                                </li>
+                                                                <li class="flex items-center gap-2">
+                                                                        <div
+                                                                                class="w-3 h-3 rounded-full bg-surface-tint">
+                                                                        </div><span
+                                                                                class="font-label-md text-label-md text-on-surface-variant">Collab
+                                                                                Zone</span>
+                                                                </li>
+                                                                <li class="flex items-center gap-2">
+                                                                        <div class="w-3 h-3 rounded-full bg-primary">
+                                                                        </div><span
+                                                                                class="font-label-md text-label-md text-on-surface-variant">Digital
+                                                                                Center</span>
+                                                                </li>
+                                                        </ul>
+                                                </div>
+                                                <!-- Abstract Floor Plan Representation -->
+                                                <div
+                                                        class="w-full h-full relative p-4 grid grid-cols-6 grid-rows-4 gap-2">
+                                                        <!-- Quiet Zone A -->
+                                                        <div
+                                                                class="col-span-4 row-span-3 bg-white border border-outline/20 rounded relative hover:border-secondary transition-colors cursor-pointer group/zone">
+                                                                <div
+                                                                        class="absolute top-2 left-2 bg-secondary/10 text-secondary font-label-md text-label-md px-2 py-0.5 rounded">
+                                                                        Quiet Zone A</div>
+                                                                <div
+                                                                        class="absolute inset-0 flex items-center justify-center opacity-0 group-hover/zone:opacity-100 transition-opacity">
+                                                                        <span
+                                                                                class="font-label-lg text-label-lg text-secondary">56
+                                                                                Seats</span>
+                                                                </div>
+                                                                <!-- Mock Seats -->
+                                                                <div
+                                                                        class="absolute inset-4 mt-8 grid grid-cols-7 grid-rows-5 gap-1 p-2">
+                                                                        <div
+                                                                                class="bg-surface border border-outline/10 rounded-sm">
+                                                                        </div>
+                                                                        <div
+                                                                                class="bg-surface border border-outline/10 rounded-sm">
+                                                                        </div>
+                                                                        <div class="bg-primary rounded-sm shadow-sm"
+                                                                                title="Occupied"></div>
+                                                                        <div
+                                                                                class="bg-surface border border-outline/10 rounded-sm">
+                                                                        </div>
+                                                                        <div class="bg-secondary rounded-sm shadow-sm animate-pulse"
+                                                                                title="Your Seat"></div>
+                                                                        <div
+                                                                                class="bg-surface border border-outline/10 rounded-sm">
+                                                                        </div>
+                                                                        <div
+                                                                                class="bg-surface border border-outline/10 rounded-sm">
+                                                                        </div>
+                                                                        <!-- ... visually omitting the rest for brevity, implying a grid ... -->
+                                                                </div>
+                                                        </div>
+                                                        <!-- Collaborative Zone -->
+                                                        <div
+                                                                class="col-span-2 row-span-2 bg-surface-container hover:bg-surface-container-high border border-outline/20 rounded relative transition-colors cursor-pointer flex items-center justify-center p-4">
+                                                                <div
+                                                                        class="absolute top-2 left-2 text-surface-tint font-label-md text-label-md px-2 py-0.5">
+                                                                        Collaborative</div>
+                                                                <span
+                                                                        class="material-symbols-outlined text-surface-tint opacity-20 text-4xl">groups</span>
+                                                        </div>
+                                                        <!-- Digital Resource Center -->
+                                                        <div
+                                                                class="col-span-2 row-span-1 bg-surface-dim hover:bg-surface-variant border border-outline/20 rounded relative transition-colors cursor-pointer flex items-center justify-center">
+                                                                <div
+                                                                        class="absolute top-2 left-2 text-primary font-label-md text-label-md px-2 py-0.5">
+                                                                        Digital Center</div>
+                                                                <span
+                                                                        class="material-symbols-outlined text-primary opacity-20">desktop_mac</span>
+                                                        </div>
+                                                        <!-- Entrance / Lockers -->
+                                                        <div
+                                                                class="col-span-6 row-span-1 border-t-2 border-dashed border-outline-variant mt-2 relative flex">
+                                                                <div
+                                                                        class="w-1/3 h-full flex flex-col justify-center items-center border-r border-outline-variant/20">
+                                                                        <span
+                                                                                class="material-symbols-outlined text-outline">door_front</span>
+                                                                        <span
+                                                                                class="font-label-md text-label-md text-outline mt-1">Main
+                                                                                Entrance</span>
+                                                                        <!-- You are here indicator -->
+                                                                        <div
+                                                                                class="absolute bottom-2 left-4 flex items-center gap-1 bg-error-container text-on-error-container px-2 py-1 rounded-full shadow-sm animate-bounce">
+                                                                                <div
+                                                                                        class="w-2 h-2 rounded-full bg-error">
+                                                                                </div>
+                                                                                <span
+                                                                                        class="font-label-md text-[10px] uppercase font-bold tracking-wider">You
+                                                                                        are here</span>
+                                                                        </div>
+                                                                </div>
+                                                                <div
+                                                                        class="w-2/3 h-full bg-tertiary-fixed/30 rounded-r flex items-center justify-center relative group/locker">
+                                                                        <span
+                                                                                class="material-symbols-outlined text-on-tertiary-fixed opacity-50">door_sliding</span>
+                                                                        <div
+                                                                                class="absolute top-2 left-2 text-on-tertiary-fixed font-label-md text-label-md px-2 py-0.5">
+                                                                                Locker Area</div>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+                                <!-- Zone Information Area (Spans 4 columns) -->
+                                <div class="lg:col-span-4 flex flex-col gap-4">
+                                        <!-- Quick Actions Card -->
+                                        <div class="bg-on-primary rounded border border-outline/20 p-md">
+                                                <h3 class="font-headline-sm text-headline-sm text-primary mb-4">Quick
+                                                        Find</h3>
+                                                <div class="relative">
+                                                        <span
+                                                                class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+                                                        <input class="w-full bg-surface border border-outline-variant focus:border-secondary focus:ring-1 focus:ring-secondary rounded pl-10 pr-4 py-2 font-body-sm text-body-sm text-on-surface placeholder:text-on-surface-variant transition-colors"
+                                                                placeholder="Search seats, zones, amenities..."
+                                                                type="text" />
+                                                </div>
+                                                <div class="mt-4 flex flex-wrap gap-2">
+                                                        <span
+                                                                class="px-3 py-1 bg-surface-container-low border border-outline-variant rounded-full font-label-md text-label-md text-on-surface-variant cursor-pointer hover:border-secondary hover:text-secondary transition-colors">Seat
+                                                                A-42</span>
+                                                        <span
+                                                                class="px-3 py-1 bg-surface-container-low border border-outline-variant rounded-full font-label-md text-label-md text-on-surface-variant cursor-pointer hover:border-secondary hover:text-secondary transition-colors">Restrooms</span>
+                                                        <span
+                                                                class="px-3 py-1 bg-surface-container-low border border-outline-variant rounded-full font-label-md text-label-md text-on-surface-variant cursor-pointer hover:border-secondary hover:text-secondary transition-colors">Water
+                                                                Dispenser</span>
+                                                </div>
+                                        </div>
+                                        <!-- Selected Zone Details -->
+                                        <div
+                                                class="bg-on-primary rounded border border-outline/20 p-md flex-1 flex flex-col">
+                                                <div class="flex items-center gap-2 mb-4">
+                                                        <div
+                                                                class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center">
+                                                                <span
+                                                                        class="material-symbols-outlined text-on-secondary-container text-sm">volume_off</span>
+                                                        </div>
+                                                        <h3 class="font-headline-sm text-headline-sm text-primary">Quiet
+                                                                Zone A</h3>
+                                                </div>
+                                                <p class="font-body-sm text-body-sm text-on-surface-variant mb-6">Our
+                                                        primary focused study area. Strict silence is maintained to
+                                                        ensure an optimal environment for deep work and preparation.</p>
+                                                <ul class="space-y-3 mb-6 flex-1">
+                                                        <li class="flex items-start gap-3">
+                                                                <span
+                                                                        class="material-symbols-outlined text-outline mt-0.5 text-[18px]">event_seat</span>
+                                                                <div>
+                                                                        <span
+                                                                                class="block font-label-lg text-label-lg text-on-surface">Capacity</span>
+                                                                        <span
+                                                                                class="block font-body-sm text-body-sm text-on-surface-variant">56
+                                                                                Premium Ergonomic Seats</span>
+                                                                </div>
+                                                        </li>
+                                                        <li class="flex items-start gap-3">
+                                                                <span
+                                                                        class="material-symbols-outlined text-outline mt-0.5 text-[18px]">electrical_services</span>
+                                                                <div>
+                                                                        <span
+                                                                                class="block font-label-lg text-label-lg text-on-surface">Power
+                                                                                &amp; Connectivity</span>
+                                                                        <span
+                                                                                class="block font-body-sm text-body-sm text-on-surface-variant">Individual
+                                                                                power outlets &amp; High-speed Wi-Fi
+                                                                                (Network: Titans_Focus)</span>
+                                                                </div>
+                                                        </li>
+                                                        <li class="flex items-start gap-3">
+                                                                <span
+                                                                        class="material-symbols-outlined text-outline mt-0.5 text-[18px]">ac_unit</span>
+                                                                <div>
+                                                                        <span
+                                                                                class="block font-label-lg text-label-lg text-on-surface">Environment</span>
+                                                                        <span
+                                                                                class="block font-body-sm text-body-sm text-on-surface-variant">Climate-controlled
+                                                                                (22°C target) with ambient white noise
+                                                                                masking.</span>
+                                                                </div>
+                                                        </li>
+                                                </ul>
+                                                <button onclick="window.location.href='seat_booking.html';"
+                                                        class="w-full bg-secondary hover:bg-on-secondary-container text-on-secondary font-label-lg text-label-lg py-3 rounded transition-colors duration-200">
+                                                        Book a Seat Here
+                                                </button>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+        </main>
+        <!-- Desktop Sidebar -->
+
+        <aside class="hidden md:flex fixed left-0 top-0 h-screen w-72 bg-surface shadow-lg flex-col z-40 pt-20 ">
+                <div class="px-6 mb-8 flex flex-col left_align">
+                        <img class="w-16 h-16 rounded-full object-cover mb-4 border-2 border-surface-variant"
+                                data-alt="A professional headshot of an academic library member. Clean, modern corporate aesthetic. High-key lighting, professional attire, soft focus background of bookshelves. Ivory and Navy tones."
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfM_w4P4CNZePfBRmJFITfWrJj3W5LqmpgxSwfXxhUqqdnbXpvfd067f_zcfm4aiwpcESNvoyGd99rrcDm1sgGyJWAmxG0h6InSjblEnX6ehTzwLDqUKSkjsft1iTzuZ2glbPglJutuFCyCzSZpCcoo3HsnraVduFrcQXw7Z-wDMwtasSiBjHasGhzKdSILHz_vIM7s1FW-kVSEo34NB3mY4r2V0iWOfMdTRKostJ7U_8os5KDc4F6" />
+                        <span
+                                class="text-headline-sm font-headline-sm text-primary dark:text-inverse-primary font-bold">Titans
+                                Member</span>
+                        <span class="text-body-md font-body-md text-on-surface-variant">Academic Year 2024</span>
+                        <span
+                                class="text-label-md font-label-md bg-secondary-container text-on-secondary-container rounded-full px-2 py-1 inline-block mt-2 w-max">Premium
+                                Member</span>
+                </div>
+
+
+
+                <a href="library_dashboard.html" class="
+flex items-center gap-4
+px-6 py-3
+hover:bg-error-container
+">
+
+                        <span class="material-symbols-outlined">
+                                home
+                        </span>
+
+                        Home
+
+                </a>
+
+
+
+                <a href="library_map.html" class="
+flex items-center gap-4
+px-6 py-3
+bg-secondary-container
+">
+
+                        <span class="material-symbols-outlined">
+                                map
+                        </span>
+
+                        Map
+
+                </a>
+
+
+
+                <a href="my_profile.html" class="
+flex items-center gap-4
+px-6 py-3
+hover:bg-error-container
+">
+
+                        <span class="material-symbols-outlined">
+                                person
+                        </span>
+
+                        Profile
+
+                </a>
+
+
+
+                <button onclick="logoutUser()" class="
+flex items-center gap-4
+px-6 py-3
+hover:bg-error-container
+">
+
+                        <span class="material-symbols-outlined">
+                                logout
+                        </span>
+
+                        Logout
+
+                </button>
+
+
+        </aside>
+        <!-- Bottom Navigation Bar (Mobile) -->
+        <nav
+                class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center h-20 px-4 bg-surface dark:bg-inverse-surface shadow-sm z-50">
+                <a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-secondary transition-colors duration-200 active:scale-90 w-16"
+                        href="library_dashboard.html">
+                        <span class="material-symbols-outlined mb-1">home</span>
+                        <span class="font-label-md text-label-md">Home</span>
+                </a>
+                <a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 active:scale-90 transition-transform w-20"
+                        href="library_map.html">
+                        <span class="material-symbols-outlined mb-1"
+                                style="font-variation-settings: 'FILL' 1;">map</span>
+                        <span class="font-label-md text-label-md">Map</span>
+                </a>
+                <a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-secondary transition-colors duration-200 active:scale-90 w-16"
+                        href="my_profile.html">
+                        <span class="material-symbols-outlined mb-1">person</span>
+                        <span class="font-label-md text-label-md">Profile</span>
+                </a>
+        </nav>
+        <div id="logoutModal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/50">
+
+
+                <div class="bg-white rounded-xl shadow-xl p-6 w-80 text-center">
+
+
+                        <span class="material-symbols-outlined text-red-500 text-5xl">
+                                logout
+                        </span>
+
+
+                        <h2 class="text-xl font-bold mt-3 text-gray-800">
+                                Confirm Logout
+                        </h2>
+
+
+                        <p class="text-gray-600 mt-2">
+                                Are you sure you want to logout?
+                        </p>
+
+
+                        <div class="flex justify-center gap-4 mt-6">
+
+
+                                <!-- Cancel Button -->
+                                <button onclick="closeLogoutModal()"
+                                        class="px-5 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600">
+                                        Cancel
+                                </button>
+
+
+                                <!-- Yes Button -->
+                                <button onclick="confirmLogout()"
+                                        class="px-5 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">
+                                        Yes, Logout
+                                </button>
+
+
+                        </div>
+
+
+                </div>
+
+        </div>
+</body>
+
+</html>

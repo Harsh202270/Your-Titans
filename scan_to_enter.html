@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>The Titans Library - Scan QR</title>
+        <script>
+
+                // Login Check
+                if (localStorage.getItem("isLoggedIn") !== "true") {
+                        window.location.replace("index.html");
+                }
+
+                async function checkBookingAccess() {
+
+                        try {
+
+                                const email = localStorage.getItem("currentUserEmail");
+
+                                if (!email) {
+                                        window.location.replace("index.html");
+                                        return;
+                                }
+
+                                const today = new Date();
+                                today.setHours(0, 0, 0, 0);
+
+                                // ==========================
+                                // Check Local Storage First
+                                // ==========================
+
+                                let booking = localStorage.getItem("bookingData");
+
+                                if (booking) {
+
+                                        booking = JSON.parse(booking);
+
+                                        const startDate = new Date(booking.startDate);
+                                        startDate.setHours(0, 0, 0, 0);
+
+                                        const endDate = new Date(booking.endDate);
+                                        endDate.setHours(0, 0, 0, 0);
+
+                                        console.log("Today's Date :", today);
+                                        console.log("Start Date   :", startDate);
+                                        console.log("End Date     :", endDate);
+
+                                        // ==========================
+                                        // Booking Expired
+                                        // ==========================
+
+                                        if (
+                                                booking.status === "Booked" &&
+                                                today > endDate
+                                        ) {
+
+                                                localStorage.removeItem("bookingData");
+                                                window.location.replace("booking_expired.html");
+                                                return;
+
+                                        }
+
+                                        // ==========================
+                                        // Booking Confirmed but Not Started
+                                        // ==========================
+
+                                        if (
+                                                booking.status === "Booked" &&
+                                                today < startDate &&
+                                                today < endDate
+                                        ) {
+
+                                                window.location.replace("booking_confirmed1.html");
+                                                return;
+
+                                        }
+
+                                        // ==========================
+                                        // Booking Active
+                                        // ==========================
+
+                                        if (
+                                                booking.status === "Booked" &&
+                                                today >= startDate &&
+                                                today <= endDate
+                                        ) {
+
+                                                console.log("Access Granted (Local Storage)");
+                                                return;
+
+                                        }
+
+                                        localStorage.removeItem("bookingData");
+
+                                }
+
+                                // ==========================
+                                // Fetch Latest Data
+                                // ==========================
+
+                                const response = await fetch(
+                                        "https://the-titans.onrender.com/user?email=" + encodeURIComponent(email)
+                                );
+
+                                const data = await response.json();
+
+                                console.log(data);
+
+                                if (!response.ok || !data.success) {
+
+                                        window.location.replace("account_pending_approval.html");
+                                        return;
+
+                                }
+
+                                if (!data.user || !data.user.booking) {
+
+                                        window.location.replace("account_pending_approval.html");
+                                        return;
+
+                                }
+
+                                booking = data.user.booking;
+
+                                localStorage.setItem(
+                                        "bookingData",
+                                        JSON.stringify(booking)
+                                );
+
+                                const startDate = new Date(booking.startDate);
+                                startDate.setHours(0, 0, 0, 0);
+
+                                const endDate = new Date(booking.endDate);
+                                endDate.setHours(0, 0, 0, 0);
+
+                                console.log("Today's Date :", today);
+                                console.log("Start Date   :", startDate);
+                                console.log("End Date     :", endDate);
+
+                                // ==========================
+                                // Booking Expired
+                                // ==========================
+
+                                if (
+                                        booking.status === "Booked" &&
+                                        today > endDate
+                                ) {
+
+                                        localStorage.removeItem("bookingData");
+                                        window.location.replace("booking_expired.html");
+                                        return;
+
+                                }
+
+                                // ==========================
+                                // Booking Confirmed but Not Started
+                                // ==========================
+
+                                if (
+                                        booking.status === "Booked" &&
+                                        today < startDate &&
+                                        today < endDate
+                                ) {
+
+                                        window.location.replace("booking_confirmed1.html");
+                                        return;
+
+                                }
+
+                                // ==========================
+                                // Booking Active
+                                // ==========================
+
+                                if (
+                                        booking.status === "Booked" &&
+                                        today >= startDate &&
+                                        today <= endDate
+                                ) {
+
+                                        console.log("Access Granted (Database)");
+                                        return;
+
+                                }
+
+                                // ==========================
+                                // Invalid / Pending Approval
+                                // ==========================
+
+                                localStorage.removeItem("bookingData");
+                                window.location.replace("account_pending_approval.html");
+
+                        }
+                        catch (error) {
+
+                                console.error("Booking Check Error:", error);
+                                window.location.replace("account_pending_approval.html");
+
+                        }
+
+                }
+
+                checkBookingAccess();
+
+                function logoutUser() {
+
+                        localStorage.clear();
+                        sessionStorage.clear();
+
+                        window.location.replace("index.html");
+
+                }
+
+        </script>
+        <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+                rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700&amp;family=JetBrains+Mono:wght@500&amp;family=Work+Sans:wght@400&amp;display=swap"
+                rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+                rel="stylesheet" />
+        <script id="tailwind-config">
+                tailwind.config = {
+                        darkMode: "class",
+                        theme: {
+                                extend: {
+                                        "colors": {
+                                                "inverse-surface": "#17324d",
+                                                "surface-container-high": "#dbe9ff",
+                                                "error": "#ba1a1a",
+                                                "on-error": "#ffffff",
+                                                "surface-variant": "#d1e4ff",
+                                                "outline-variant": "#c4c6cc",
+                                                "inverse-on-surface": "#e9f1ff",
+                                                "surface-bright": "#f8f9ff",
+                                                "on-tertiary": "#ffffff",
+                                                "on-secondary-fixed": "#261900",
+                                                "surface-container-highest": "#d1e4ff",
+                                                "secondary-container": "#fed488",
+                                                "secondary-fixed": "#ffdea5",
+                                                "on-error-container": "#93000a",
+                                                "on-background": "#001d36",
+                                                "on-primary-fixed-variant": "#3a4859",
+                                                "on-secondary-container": "#785a1a",
+                                                "primary-fixed-dim": "#bac8dc",
+                                                "inverse-primary": "#bac8dc",
+                                                "surface-tint": "#525f71",
+                                                "on-surface": "#001d36",
+                                                "outline": "#74777d",
+                                                "on-surface-variant": "#44474c",
+                                                "primary-container": "#0f1c2c",
+                                                "error-container": "#ffdad6",
+                                                "secondary": "#775a19",
+                                                "on-primary": "#ffffff",
+                                                "on-primary-container": "#778598",
+                                                "on-tertiary-fixed-variant": "#48473a",
+                                                "primary": "#000000",
+                                                "surface-container-lowest": "#ffffff",
+                                                "surface": "#f8f9ff",
+                                                "surface-container-low": "#eef4ff",
+                                                "tertiary-fixed": "#e6e3d0",
+                                                "surface-container": "#e5efff",
+                                                "primary-fixed": "#d6e4f9",
+                                                "on-secondary": "#ffffff",
+                                                "tertiary": "#000000",
+                                                "on-primary-fixed": "#0f1c2c",
+                                                "on-tertiary-container": "#868474",
+                                                "secondary-fixed-dim": "#e9c176",
+                                                "tertiary-container": "#1c1c11",
+                                                "on-secondary-fixed-variant": "#5d4201",
+                                                "on-tertiary-fixed": "#1c1c11",
+                                                "background": "#f8f9ff",
+                                                "tertiary-fixed-dim": "#c9c7b5",
+                                                "surface-dim": "#c2dcff"
+                                        },
+                                        "borderRadius": {
+                                                "DEFAULT": "0.125rem",
+                                                "lg": "0.25rem",
+                                                "xl": "0.5rem",
+                                                "full": "0.75rem"
+                                        },
+                                        "spacing": {
+                                                "base": "4px",
+                                                "lg": "40px",
+                                                "xl": "64px",
+                                                "xs": "8px",
+                                                "margin-mobile": "16px",
+                                                "md": "24px",
+                                                "sm": "16px",
+                                                "gutter": "24px",
+                                                "margin-desktop": "80px"
+                                        },
+                                        "fontFamily": {
+                                                "headline-lg-mobile": [
+                                                        "Hanken Grotesk"
+                                                ],
+                                                "headline-lg": [
+                                                        "Hanken Grotesk"
+                                                ],
+                                                "headline-md": [
+                                                        "Hanken Grotesk"
+                                                ],
+                                                "headline-sm": [
+                                                        "Hanken Grotesk"
+                                                ],
+                                                "body-sm": [
+                                                        "Work Sans"
+                                                ],
+                                                "label-lg": [
+                                                        "JetBrains Mono"
+                                                ],
+                                                "body-md": [
+                                                        "Work Sans"
+                                                ],
+                                                "label-md": [
+                                                        "JetBrains Mono"
+                                                ],
+                                                "body-lg": [
+                                                        "Work Sans"
+                                                ]
+                                        },
+                                        "fontSize": {
+                                                "headline-lg-mobile": [
+                                                        "32px",
+                                                        {
+                                                                "lineHeight": "40px",
+                                                                "fontWeight": "700"
+                                                        }
+                                                ],
+                                                "headline-lg": [
+                                                        "40px",
+                                                        {
+                                                                "lineHeight": "48px",
+                                                                "letterSpacing": "-0.02em",
+                                                                "fontWeight": "700"
+                                                        }
+                                                ],
+                                                "headline-md": [
+                                                        "28px",
+                                                        {
+                                                                "lineHeight": "36px",
+                                                                "fontWeight": "600"
+                                                        }
+                                                ],
+                                                "headline-sm": [
+                                                        "20px",
+                                                        {
+                                                                "lineHeight": "28px",
+                                                                "fontWeight": "600"
+                                                        }
+                                                ],
+                                                "body-sm": [
+                                                        "14px",
+                                                        {
+                                                                "lineHeight": "20px",
+                                                                "fontWeight": "400"
+                                                        }
+                                                ],
+                                                "label-lg": [
+                                                        "14px",
+                                                        {
+                                                                "lineHeight": "20px",
+                                                                "letterSpacing": "0.05em",
+                                                                "fontWeight": "500"
+                                                        }
+                                                ],
+                                                "body-md": [
+                                                        "16px",
+                                                        {
+                                                                "lineHeight": "24px",
+                                                                "fontWeight": "400"
+                                                        }
+                                                ],
+                                                "label-md": [
+                                                        "12px",
+                                                        {
+                                                                "lineHeight": "16px",
+                                                                "letterSpacing": "0.05em",
+                                                                "fontWeight": "500"
+                                                        }
+                                                ],
+                                                "body-lg": [
+                                                        "18px",
+                                                        {
+                                                                "lineHeight": "28px",
+                                                                "fontWeight": "400"
+                                                        }
+                                                ]
+                                        }
+                                },
+                        },
+                }
+        </script>
+        <style>
+                .scanner-frame {
+                        overflow: hidden;
+                }
+
+                .scanner-line {
+                        animation: scan 2s linear infinite;
+                }
+
+                @keyframes scan {
+                        0% {
+                                top: 8px;
+                        }
+
+                        50% {
+                                top: calc(100% - 12px);
+                        }
+
+                        100% {
+                                top: 8px;
+                        }
+                }
+
+                .bg-overlay {
+                        background-color: rgba(15, 28, 44, 0.85);
+                        /* primary-container with opacity */
+                }
+        </style>
+</head>
+
+<body class="bg-surface text-on-surface min-h-screen flex flex-col font-body-md overflow-hidden">
+        <!-- Top App Bar - Transactional intent, no full nav -->
+        <header class="fixed top-0 left-0 w-full h-16 bg-surface flex items-center px-4 shadow-sm z-50">
+
+                <button onclick="history.back()" class="p-2 rounded-full hover:bg-secondary-container transition">
+
+                        <span class="material-symbols-outlined">
+                                arrow_back
+                        </span>
+
+                </button>
+
+                <h1 class="ml-2 text-headline-sm font-bold">
+                        The Titans Library
+                </h1>
+
+        </header>
+        <!-- Main Canvas -->
+        <main class="flex-grow pt-16 flex flex-col relative h-screen">
+                <!-- Camera Feed Background (Simulated) -->
+                <div class="absolute inset-0 z-0 bg-inverse-surface w-full h-full">
+                        <img class="w-full h-full object-cover opacity-60"
+                                data-alt="A blurred background showing the entrance to a modern library. A wooden desk and glass doors are visible out of focus. The lighting is bright and even, creating a professional, academic atmosphere. The color palette is composed of warm ivories, crisp whites, and subtle navy accents."
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTLXYDveKWiTOpg_9Vi36FsavvvTnSQ3neYbuVzUKvogCozTa1DjJFg2ybuBjPl14Stb_SWoDEWRjbFbnQkB82bktxil60kwSIef4FRVTj7Z7bne6nYxGzf5VmP33serK29-2nDsl_VU8tFsZsQcw5JDfncIWnKs738MPDS9lm_Fr3ijrMl1CzGvUyyazgoQwfOSJlpctJPd_0QpSEBvFnW1VXBQ-gDks2MKcx9nwUBKRdun9wuy8R" />
+                </div>
+                <!-- Overlay -->
+                <div class="absolute inset-0 z-10 bg-overlay flex flex-col justify-between pt-12 pb-8 px-4">
+                        <!-- Header Section -->
+                        <div class="text-center mt-lg">
+                                <h2
+                                        class="font-headline-lg-mobile text-headline-lg-mobile text-on-primary md:font-headline-lg md:text-headline-lg mb-2">
+                                        Scan to Mark Attendance</h2>
+                                <p class="font-body-md text-body-md text-surface-variant max-w-sm mx-auto">Align the QR
+                                        code within the frame to verify your seat booking.</p>
+                        </div>
+                        <!-- Scanner Viewfinder -->
+                        <div class="relative w-64 h-64 mx-auto my-8 scanner-frame rounded-lg overflow-hidden">
+
+                                <!-- Real Camera Scanner Area -->
+                                <div id="reader" class="absolute inset-0 w-full h-full"></div>
+
+                                <!-- Scanner Overlay -->
+                                <div
+                                        class="absolute inset-2 border-2 border-outline-variant/30 rounded-lg pointer-events-none z-20">
+                                </div>
+
+                                <!-- Corner Borders -->
+                                <div
+                                        class="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-secondary-container rounded-tl-lg z-30">
+                                </div>
+
+                                <div
+                                        class="absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 border-secondary-container rounded-tr-lg z-30">
+                                </div>
+
+                                <div
+                                        class="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-secondary-container rounded-bl-lg z-30">
+                                </div>
+
+                                <div
+                                        class="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-secondary-container rounded-br-lg z-30">
+                                </div>
+
+                                <!-- Scanner Line -->
+                                <div
+                                        class="scanner-line absolute left-2 right-2 h-1 rounded-full bg-secondary-container shadow-[0_0_12px_rgba(254,212,136,.8)] z-40">
+                                </div>
+
+                        </div>
+                        <!-- Action Section -->
+                        <div class="flex flex-col items-center gap-4 mt-auto mb-margin-mobile">
+                                <div
+                                        class="flex gap-2 items-center bg-surface-container-high/20 px-4 py-2 rounded-full mb-4">
+                                        <span class="material-symbols-outlined text-secondary-container"
+                                                style="font-variation-settings: 'FILL' 1;">qr_code_scanner</span>
+                                        <span class="font-label-md text-label-md text-surface-bright">Point camera at
+                                                code</span>
+                                </div>
+                                <button
+                                        class="w-full max-w-sm border border-outline-variant text-on-primary bg-transparent hover:bg-surface-container-high/20 active:scale-95 transition-all duration-200 py-4 rounded-xl font-label-lg text-label-lg flex justify-center items-center gap-2">
+                                        <span class="material-symbols-outlined"
+                                                style="font-variation-settings: 'FILL' 0;">keyboard</span>
+                                        Enter Manually
+                                </button>
+                        </div>
+                </div>
+        </main>
+        <script src="https://unpkg.com/html5-qrcode"></script>
+        <!-- Attendance Success Popup -->
+
+        <div id="attendancePopup"
+                class="hidden fixed inset-0 bg-black/60 z-[999] flex items-center justify-center px-4">
+
+                <div class="bg-white rounded-2xl shadow-xl w-full max-w-sm p-6 text-center">
+
+
+                        <div id="popupIcon"
+                                class="mx-auto w-16 h-16 rounded-full flex items-center justify-center bg-green-100 mb-4">
+
+                                <span class="material-symbols-outlined text-green-600 text-4xl">
+                                        check_circle
+                                </span>
+
+                        </div>
+
+
+                        <h2 id="popupTitle" class="text-2xl font-bold text-gray-800">
+                                Success
+                        </h2>
+
+
+                        <p id="popupMessage" class="text-gray-600 mt-3">
+
+                        </p>
+
+
+                        <button onclick="closeAttendancePopup()"
+                                class="mt-6 w-full bg-black text-white py-3 rounded-xl">
+
+                                OK
+
+                        </button>
+
+
+                </div>
+
+        </div>
+        <div id="errorPopup" class="hidden fixed inset-0 bg-black/60 z-[999] flex items-center justify-center px-4">
+
+                <div class="bg-white rounded-3xl shadow-2xl w-full max-w-sm p-8 text-center">
+
+
+                        <div class="mx-auto w-20 h-20 rounded-full bg-red-100 flex items-center justify-center mb-5">
+
+                                <span class="text-5xl">
+                                        ❌
+                                </span>
+
+                        </div>
+
+
+                        <h2 class="text-2xl font-bold text-gray-800">
+                                Attendance Completed
+                        </h2>
+
+
+                        <p id="errorMessage" class="text-gray-600 mt-3 text-lg">
+                        </p>
+
+
+                        <button onclick="closeErrorPopup()"
+                                class="mt-6 w-full bg-black text-white py-3 rounded-xl text-lg hover:scale-105 transition">
+
+                                OK
+
+                        </button>
+
+
+                </div>
+
+        </div>
+</body>
+<script>
+        let scanCompleted = false;
+        async function onScanSuccess(decodedText, decodedResult) {
+
+                if (scanCompleted) {
+                        return;
+                }
+
+
+                scanCompleted = true;
+
+                console.log("QR:", decodedText);
+
+
+                if (decodedText !== "LIBRARY_ENTRY_QR") {
+
+                        alert("Invalid QR Code");
+                        return;
+
+                }
+
+
+                const email = localStorage.getItem("currentUserEmail");
+
+
+                if (!email) {
+
+                        alert("Login required");
+                        return;
+
+                }
+
+
+                try {
+
+                        let response = await fetch(
+                                "https://the-titans.onrender.com/attendance",
+                                {
+                                        method: "POST",
+                                        headers: {
+                                                "Content-Type": "application/json"
+                                        },
+                                        body: JSON.stringify({
+                                                email: email
+                                        })
+                                }
+                        );
+
+
+                        let data = await response.json();
+
+
+                        console.log("Attendance Response:", data);
+
+
+                        if (data.success) {
+
+
+                                if (data.message === "Today's attendance already completed") {
+
+                                        showErrorPopup(data.message);
+
+                                        return;
+
+                                }
+
+
+                                const attendanceType = data.type;
+
+
+                                const attendanceTime =
+                                        data.exitTime ||
+                                        data.entryTime ||
+                                        new Date().toLocaleString();
+
+
+
+                                window.location.href =
+                                        `attendance_success.html?type=${attendanceType}&time=${encodeURIComponent(attendanceTime)}`;
+
+
+                        }
+                        else {
+
+                                alert(data.message);
+
+                        }
+
+                }
+                catch (error) {
+
+                        console.log(error);
+                        alert("Attendance API Error");
+
+                }
+
+        }
+
+        function onScanFailure(error) {
+                // Ignore scan errors
+        }
+
+        const html5QrCode = new Html5Qrcode("reader");
+
+        // Pehle Back Camera open karne ki koshish
+        html5QrCode.start(
+                { facingMode: "environment" },
+                {
+                        fps: 10,
+                        qrbox: {
+                                width: 220,
+                                height: 220
+                        }
+                },
+                onScanSuccess,
+                onScanFailure
+        ).catch(err => {
+
+                console.log("Back camera not found, trying available camera...");
+
+                // Agar back camera na mile to available camera use kare
+                Html5Qrcode.getCameras().then(devices => {
+
+                        if (devices && devices.length) {
+
+                                let cameraId = devices.find(device =>
+                                        device.label.toLowerCase().includes("back") ||
+                                        device.label.toLowerCase().includes("rear") ||
+                                        device.label.toLowerCase().includes("environment")
+                                )?.id || devices[devices.length - 1].id;
+
+                                html5QrCode.start(
+                                        cameraId,
+                                        {
+                                                fps: 10,
+                                                qrbox: {
+                                                        width: 220,
+                                                        height: 220
+                                                }
+                                        },
+                                        onScanSuccess,
+                                        onScanFailure
+                                );
+
+                        } else {
+                                console.error("No camera found.");
+                        }
+
+                }).catch(error => {
+                        console.error("Camera error:", error);
+                });
+
+        });
+
+        function showErrorPopup(message) {
+
+                html5QrCode.stop().catch(err => {
+                        console.log(err);
+                });
+
+
+                document.getElementById("errorMessage").innerHTML = message;
+
+
+                document.getElementById("errorPopup")
+                        .classList.remove("hidden");
+
+        }
+
+
+
+        function closeErrorPopup() {
+
+                document.getElementById("errorPopup")
+                        .classList.add("hidden");
+
+        }
+        function showAttendancePopup(title, message) {
+
+                document.getElementById("popupTitle").innerHTML = title;
+
+                document.getElementById("popupMessage").innerHTML = message;
+
+
+                document.getElementById("attendancePopup")
+                        .classList.remove("hidden");
+
+        }
+
+
+
+        function closeAttendancePopup() {
+
+                document.getElementById("attendancePopup")
+                        .classList.add("hidden");
+
+
+        }
+</script>
+
+</html>
